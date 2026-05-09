@@ -1,0 +1,3656 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Willow & Sage Co. — Handcrafted Self-Care</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --sage: #6b8e6b;
+        --sage-light: #8aaa8a;
+        --sage-dark: #4e6b4e;
+        --lavender: #b8a9c9;
+        --lavender-light: #d4cde0;
+        --cream: #f8f5f0;
+        --cream-dark: #eee8df;
+        --taupe: #a09080;
+        --blush: #e8b4b0;
+        --text-dark: #3a3228;
+        --text-mid: #6b5f55;
+        --text-light: #9a8e84;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Jost", sans-serif;
+        background: var(--cream);
+        color: var(--text-dark);
+        overflow-x: hidden;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      .serif {
+        font-family: "Cormorant Garamond", serif;
+      }
+      .view {
+        display: none;
+      }
+      .view.active {
+        display: block;
+      }
+      .btn-sage {
+        background: var(--sage);
+        color: #fff;
+        border-radius: 50px;
+        padding: 12px 28px;
+        font-family: "Jost", sans-serif;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        font-size: 0.85rem;
+        transition: all 0.3s;
+        border: none;
+        cursor: pointer;
+      }
+      .btn-sage:hover {
+        background: var(--sage-dark);
+        transform: translateY(-1px);
+        box-shadow: 0 6px 20px rgba(107, 142, 107, 0.35);
+      }
+      .btn-outline {
+        background: transparent;
+        border: 1.5px solid var(--sage);
+        color: var(--sage);
+        border-radius: 50px;
+        padding: 10px 24px;
+        font-family: "Jost", sans-serif;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        font-size: 0.85rem;
+        transition: all 0.3s;
+        cursor: pointer;
+      }
+      .btn-outline:hover {
+        background: var(--sage);
+        color: #fff;
+      }
+      .card {
+        background: #fff;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+        transition: all 0.35s;
+      }
+      .card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+      }
+      .nav-link {
+        cursor: pointer;
+        font-size: 0.82rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--text-mid);
+        transition: color 0.25s;
+        padding: 4px 0;
+        position: relative;
+      }
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        right: 0;
+        height: 1.5px;
+        background: var(--sage);
+        transform: scaleX(0);
+        transition: transform 0.3s;
+      }
+      .nav-link:hover,
+      .nav-link.active {
+        color: var(--sage);
+      }
+      .nav-link:hover::after,
+      .nav-link.active::after {
+        transform: scaleX(1);
+      }
+      .hero-img {
+        background: linear-gradient(
+          135deg,
+          #d4e4d4 0%,
+          #e8dff0 40%,
+          #f0e8d8 100%
+        );
+        position: relative;
+        overflow: hidden;
+      }
+      .hero-img::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%236b8e6b' fill-opacity='0.06'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      }
+      .product-img {
+        background: linear-gradient(145deg, #e8f0e8, #f0e8f5, #f5ede0);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 4rem;
+        min-height: 220px;
+      }
+      .tag {
+        display: inline-block;
+        background: var(--lavender-light);
+        color: #6a5a7a;
+        border-radius: 20px;
+        padding: 3px 12px;
+        font-size: 0.72rem;
+        letter-spacing: 0.07em;
+        font-weight: 500;
+      }
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        padding: 5px 14px;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        border: 1.5px solid #ddd;
+        cursor: pointer;
+        transition: all 0.25s;
+        background: #fff;
+        color: var(--text-mid);
+        user-select: none;
+      }
+      .chip.active {
+        border-color: var(--sage);
+        background: var(--sage);
+        color: #fff;
+      }
+      .chip:hover:not(.active) {
+        border-color: var(--sage);
+        color: var(--sage);
+      }
+      .star {
+        color: #d4a444;
+      }
+      .toast {
+        position: fixed;
+        bottom: 28px;
+        right: 28px;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: var(--text-dark);
+        color: #fff;
+        padding: 14px 22px;
+        border-radius: 14px;
+        font-size: 0.85rem;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+        transform: translateY(80px);
+        opacity: 0;
+        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        pointer-events: none;
+      }
+      .toast.show {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      .modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(30, 24, 20, 0.55);
+        backdrop-filter: blur(4px);
+        z-index: 1000;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      .modal-overlay.open {
+        display: flex;
+      }
+      .modal-box {
+        background: var(--cream);
+        border-radius: 24px;
+        max-width: 860px;
+        width: 100%;
+        max-height: 90vh;
+        overflow-y: auto;
+        position: relative;
+        animation: modalIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+      @keyframes modalIn {
+        from {
+          transform: scale(0.92) translateY(20px);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1) translateY(0);
+          opacity: 1;
+        }
+      }
+      .cart-sidebar {
+        position: fixed;
+        top: 0;
+        right: -420px;
+        width: 100%;
+        max-width: 420px;
+        height: 100vh;
+        background: var(--cream);
+        z-index: 900;
+        box-shadow: -8px 0 40px rgba(0, 0, 0, 0.12);
+        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        flex-direction: column;
+      }
+      .cart-sidebar.open {
+        right: 0;
+      }
+      .cart-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 850;
+        display: none;
+      }
+      .cart-overlay.open {
+        display: block;
+      }
+      .accordion-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease;
+      }
+      .accordion-content.open {
+        max-height: 400px;
+      }
+      .masonry {
+        columns: 2;
+        gap: 20px;
+      }
+      @media (min-width: 768px) {
+        .masonry {
+          columns: 3;
+        }
+      }
+      .masonry-item {
+        break-inside: avoid;
+        margin-bottom: 20px;
+      }
+      .confetti-piece {
+        position: fixed;
+        width: 10px;
+        height: 10px;
+        border-radius: 2px;
+        z-index: 9999;
+        animation: confettiFall 3s forwards;
+      }
+      @keyframes confettiFall {
+        0% {
+          transform: translateY(-100px) rotate(0deg);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(100vh) rotate(720deg);
+          opacity: 0;
+        }
+      }
+      .slide-in {
+        animation: slideIn 0.5s ease forwards;
+      }
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(24px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .hero-text {
+        animation: heroFade 1s ease 0.2s both;
+      }
+      @keyframes heroFade {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .scent-pill {
+        display: inline-block;
+        padding: 2px 10px;
+        border-radius: 10px;
+        font-size: 0.7rem;
+        font-weight: 500;
+      }
+      input[type="range"] {
+        accent-color: var(--sage);
+      }
+      .sticky-header {
+        position: sticky;
+        top: 0;
+        z-index: 800;
+      }
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #f0ebe4;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--lavender);
+        border-radius: 4px;
+      }
+      .ingredient-card {
+        background: #fff;
+        border-radius: 16px;
+        padding: 20px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s;
+      }
+      .ingredient-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      }
+      .journal-card {
+        break-inside: avoid;
+        background: #fff;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 3px 16px rgba(0, 0, 0, 0.07);
+        transition: all 0.3s;
+        cursor: pointer;
+      }
+      .journal-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+      }
+      .review-card {
+        background: #fff;
+        border-radius: 16px;
+        padding: 24px;
+        box-shadow: 0 2px 14px rgba(0, 0, 0, 0.06);
+      }
+      .bundle-card {
+        background: #fff;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+        transition: all 0.3s;
+      }
+      .bundle-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 14px 40px rgba(0, 0, 0, 0.12);
+      }
+      .qty-btn {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        border: 1.5px solid #ddd;
+        background: #fff;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+        transition: all 0.2s;
+      }
+      .qty-btn:hover {
+        border-color: var(--sage);
+        color: var(--sage);
+      }
+      .search-input {
+        border: 1.5px solid #ddd;
+        border-radius: 30px;
+        padding: 8px 16px 8px 36px;
+        font-size: 0.82rem;
+        font-family: "Jost", sans-serif;
+        background: #fff;
+        transition: all 0.3s;
+        width: 180px;
+        outline: none;
+      }
+      .search-input:focus {
+        border-color: var(--sage);
+        box-shadow: 0 0 0 3px rgba(107, 142, 107, 0.12);
+        width: 220px;
+      }
+      .progress-bar {
+        height: 4px;
+        background: var(--cream-dark);
+        border-radius: 2px;
+        overflow: hidden;
+      }
+      .progress-fill {
+        height: 100%;
+        background: var(--sage);
+        border-radius: 2px;
+      }
+      @media (max-width: 768px) {
+        .desktop-nav {
+          display: none;
+        }
+        .mobile-menu {
+          display: flex;
+        }
+        .search-input {
+          width: 130px;
+        }
+        .hero-content {
+          padding: 40px 20px;
+        }
+      }
+      @media (min-width: 769px) {
+        .mobile-menu {
+          display: none;
+        }
+        .desktop-nav {
+          display: flex;
+        }
+      }
+      .mobile-nav-overlay {
+        position: fixed;
+        inset: 0;
+        background: var(--cream);
+        z-index: 850;
+        transform: translateX(-100%);
+        transition: transform 0.35s ease;
+        display: flex;
+        flex-direction: column;
+        padding: 80px 40px 40px;
+        gap: 24px;
+      }
+      .mobile-nav-overlay.open {
+        transform: translateX(0);
+      }
+      .badge {
+        position: absolute;
+        top: -6px;
+        right: -8px;
+        background: var(--blush);
+        color: var(--text-dark);
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        font-size: 0.65rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .filter-sidebar {
+        background: #fff;
+        border-radius: 20px;
+        padding: 24px;
+        box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+      }
+      .section-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(2rem, 4vw, 2.8rem);
+        font-weight: 400;
+        color: var(--text-dark);
+        line-height: 1.2;
+      }
+      .process-step {
+        display: flex;
+        gap: 20px;
+        align-items: flex-start;
+      }
+      .process-num {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: var(--sage);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.1rem;
+        flex-shrink: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- TOAST -->
+    <div id="toast" class="toast">
+      <span id="toast-icon">✓</span>
+      <span id="toast-msg">Added to cart!</span>
+    </div>
+
+    <!-- CART OVERLAY -->
+    <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+
+    <!-- CART SIDEBAR -->
+    <div class="cart-sidebar" id="cartSidebar">
+      <div
+        style="
+          padding: 24px 24px 16px;
+          border-bottom: 1px solid var(--cream-dark);
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        "
+      >
+        <h3 class="serif" style="font-size: 1.5rem; font-weight: 500">
+          Your Cart
+        </h3>
+        <button
+          onclick="closeCart()"
+          style="
+            background: none;
+            border: none;
+            font-size: 1.4rem;
+            cursor: pointer;
+            color: var(--text-mid);
+          "
+        >
+          ✕
+        </button>
+      </div>
+      <div
+        id="cartItems"
+        style="flex: 1; overflow-y: auto; padding: 16px 24px"
+      ></div>
+      <div style="padding: 16px 24px; border-top: 1px solid var(--cream-dark)">
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            font-size: 1rem;
+          "
+        >
+          <span style="color: var(--text-mid)">Subtotal</span>
+          <span id="cartSubtotal" style="font-weight: 600; font-size: 1.1rem"
+            >$0.00</span
+          >
+        </div>
+        <p
+          style="
+            font-size: 0.75rem;
+            color: var(--text-light);
+            margin-bottom: 12px;
+            text-align: center;
+          "
+        >
+          Free shipping on orders over $45 🌿
+        </p>
+        <button
+          class="btn-sage"
+          style="width: 100%; font-size: 0.9rem; padding: 14px"
+          onclick="openCheckout()"
+        >
+          Proceed to Checkout →
+        </button>
+        <button
+          class="btn-outline"
+          style="width: 100%; margin-top: 10px"
+          onclick="closeCart()"
+        >
+          Continue Shopping
+        </button>
+      </div>
+    </div>
+
+    <!-- MOBILE NAV OVERLAY -->
+    <div class="mobile-nav-overlay" id="mobileNav">
+      <button
+        onclick="closeMobileNav()"
+        style="
+          position: absolute;
+          top: 24px;
+          right: 24px;
+          background: none;
+          border: none;
+          font-size: 1.5rem;
+          cursor: pointer;
+        "
+      >
+        ✕
+      </button>
+      <a
+        class="nav-link"
+        style="font-size: 1.1rem"
+        onclick="
+          showView('home');
+          closeMobileNav();
+        "
+        >Home</a
+      >
+      <a
+        class="nav-link"
+        style="font-size: 1.1rem"
+        onclick="
+          showView('shop');
+          closeMobileNav();
+        "
+        >Shop All</a
+      >
+      <a
+        class="nav-link"
+        style="font-size: 1.1rem"
+        onclick="
+          filterCat('Lotion');
+          closeMobileNav();
+        "
+        >Lotions</a
+      >
+      <a
+        class="nav-link"
+        style="font-size: 1.1rem"
+        onclick="
+          filterCat('Bath Salts');
+          closeMobileNav();
+        "
+        >Bath Salts</a
+      >
+      <a
+        class="nav-link"
+        style="font-size: 1.1rem"
+        onclick="
+          showView('bundles');
+          closeMobileNav();
+        "
+        >Gift Sets</a
+      >
+      <a
+        class="nav-link"
+        style="font-size: 1.1rem"
+        onclick="
+          showView('story');
+          closeMobileNav();
+        "
+        >Our Story</a
+      >
+      <a
+        class="nav-link"
+        style="font-size: 1.1rem"
+        onclick="
+          showView('journal');
+          closeMobileNav();
+        "
+        >Journal</a
+      >
+      <a
+        class="nav-link"
+        style="font-size: 1.1rem"
+        onclick="
+          showView('contact');
+          closeMobileNav();
+        "
+        >Contact</a
+      >
+    </div>
+
+    <!-- STICKY HEADER -->
+    <header
+      class="sticky-header"
+      style="
+        background: rgba(248, 245, 240, 0.95);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      "
+    >
+      <div
+        style="
+          max-width: 1280px;
+          margin: 0 auto;
+          padding: 0 24px;
+          height: 68px;
+          display: flex;
+          align-items: center;
+          gap: 20px;
+          justify-content: space-between;
+        "
+      >
+        <!-- Logo -->
+        <div onclick="showView('home')" style="cursor: pointer; flex-shrink: 0">
+          <div
+            style="
+              font-family: &quot;Cormorant Garamond&quot;, serif;
+              font-size: 1.45rem;
+              font-weight: 600;
+              color: var(--sage-dark);
+              line-height: 1;
+            "
+          >
+            Willow & Sage
+          </div>
+          <div
+            style="
+              font-family: &quot;Jost&quot;, sans-serif;
+              font-size: 0.58rem;
+              letter-spacing: 0.18em;
+              text-transform: uppercase;
+              color: var(--taupe);
+            "
+          >
+            Co. · Handcrafted Self-Care
+          </div>
+        </div>
+        <!-- Desktop Nav -->
+        <nav class="desktop-nav" style="gap: 22px; align-items: center">
+          <a class="nav-link" onclick="showView('home')">Home</a>
+          <a class="nav-link" onclick="showView('shop')">Shop</a>
+          <a class="nav-link" onclick="filterCat('Lotion')">Lotions</a>
+          <a class="nav-link" onclick="filterCat('Bath Salts')">Bath Salts</a>
+          <a class="nav-link" onclick="showView('bundles')">Gift Sets</a>
+          <a class="nav-link" onclick="showView('story')">Our Story</a>
+          <a class="nav-link" onclick="showView('journal')">Journal</a>
+          <a class="nav-link" onclick="showView('contact')">Contact</a>
+        </nav>
+        <!-- Right Controls -->
+        <div
+          style="display: flex; align-items: center; gap: 14px; flex-shrink: 0"
+        >
+          <div style="position: relative; display: flex; align-items: center">
+            <span
+              style="
+                position: absolute;
+                left: 12px;
+                color: var(--text-light);
+                font-size: 0.85rem;
+              "
+              >🔍</span
+            >
+            <input
+              class="search-input"
+              id="searchInput"
+              type="text"
+              placeholder="Search products..."
+              oninput="handleSearch(this.value)"
+              onfocus="showView('shop')"
+            />
+          </div>
+          <button
+            onclick="openCart()"
+            style="
+              background: none;
+              border: none;
+              cursor: pointer;
+              position: relative;
+              padding: 4px;
+            "
+            title="Cart"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="var(--text-dark)"
+              stroke-width="1.7"
+            >
+              <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <path d="M16 10a4 4 0 01-8 0" />
+            </svg>
+            <span class="badge" id="cartBadge" style="display: none">0</span>
+          </button>
+          <button
+            class="btn-sage"
+            style="padding: 9px 20px; font-size: 0.78rem"
+            onclick="showView('shop')"
+          >
+            Shop All
+          </button>
+          <button
+            class="mobile-menu"
+            onclick="openMobileNav()"
+            style="
+              background: none;
+              border: none;
+              cursor: pointer;
+              padding: 4px;
+            "
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="var(--text-dark)"
+              stroke-width="1.7"
+            >
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== HOME VIEW ===== -->
+    <div id="view-home" class="view active">
+      <!-- Hero -->
+      <section
+        class="hero-img"
+        style="min-height: 88vh; display: flex; align-items: center"
+      >
+        <div
+          style="
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.4;
+          "
+        >
+          <div
+            style="
+              width: 600px;
+              height: 600px;
+              border-radius: 50%;
+              background: radial-gradient(
+                circle,
+                var(--lavender-light),
+                transparent 70%
+              );
+            "
+          ></div>
+        </div>
+        <!-- Decorative jars -->
+        <div
+          style="
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 8rem;
+            opacity: 0.5;
+            filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.1));
+          "
+        >
+          🫙
+        </div>
+        <div
+          style="
+            position: absolute;
+            right: 18%;
+            top: 35%;
+            font-size: 4rem;
+            opacity: 0.4;
+          "
+        >
+          🌿
+        </div>
+        <div
+          style="
+            position: absolute;
+            right: 12%;
+            top: 65%;
+            font-size: 3rem;
+            opacity: 0.35;
+          "
+        >
+          💜
+        </div>
+        <div
+          class="hero-content"
+          style="
+            position: relative;
+            max-width: 700px;
+            padding: 80px 60px;
+            z-index: 2;
+          "
+        >
+          <div class="hero-text">
+            <span class="tag" style="margin-bottom: 20px; display: inline-block"
+              >Small-batch · Handcrafted · Natural</span
+            >
+            <h1
+              class="serif"
+              style="
+                font-size: clamp(2.8rem, 6vw, 4.5rem);
+                font-weight: 300;
+                line-height: 1.1;
+                color: var(--text-dark);
+                margin: 16px 0 24px;
+              "
+            >
+              Handcrafted self-care,<br /><em
+                style="font-style: italic; color: var(--sage)"
+                >made with love</em
+              ><br />in small batches.
+            </h1>
+            <p
+              style="
+                font-size: 1.05rem;
+                color: var(--text-mid);
+                max-width: 440px;
+                line-height: 1.7;
+                margin-bottom: 36px;
+              "
+            >
+              Pure ingredients. Intentional formulas. Made by hand in Elena's
+              kitchen — because your skin deserves better than mass production.
+            </p>
+            <div style="display: flex; gap: 14px; flex-wrap: wrap">
+              <button
+                class="btn-sage"
+                style="font-size: 0.9rem; padding: 14px 36px"
+                onclick="showView('shop')"
+              >
+                Shop Now →
+              </button>
+              <button class="btn-outline" onclick="showView('story')">
+                Our Story
+              </button>
+            </div>
+            <div
+              style="
+                margin-top: 40px;
+                display: flex;
+                gap: 28px;
+                flex-wrap: wrap;
+              "
+            >
+              <div>
+                <div
+                  style="
+                    font-family: &quot;Cormorant Garamond&quot;, serif;
+                    font-size: 1.6rem;
+                    color: var(--sage);
+                    font-weight: 500;
+                  "
+                >
+                  2,400+
+                </div>
+                <div
+                  style="
+                    font-size: 0.75rem;
+                    color: var(--text-light);
+                    letter-spacing: 0.08em;
+                  "
+                >
+                  Happy customers
+                </div>
+              </div>
+              <div>
+                <div
+                  style="
+                    font-family: &quot;Cormorant Garamond&quot;, serif;
+                    font-size: 1.6rem;
+                    color: var(--sage);
+                    font-weight: 500;
+                  "
+                >
+                  100%
+                </div>
+                <div
+                  style="
+                    font-size: 0.75rem;
+                    color: var(--text-light);
+                    letter-spacing: 0.08em;
+                  "
+                >
+                  Natural ingredients
+                </div>
+              </div>
+              <div>
+                <div
+                  style="
+                    font-family: &quot;Cormorant Garamond&quot;, serif;
+                    font-size: 1.6rem;
+                    color: var(--sage);
+                    font-weight: 500;
+                  "
+                >
+                  4.9★
+                </div>
+                <div
+                  style="
+                    font-size: 0.75rem;
+                    color: var(--text-light);
+                    letter-spacing: 0.08em;
+                  "
+                >
+                  Average rating
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Why Shop -->
+      <section style="padding: 80px 24px; background: #fff">
+        <div style="max-width: 1100px; margin: 0 auto; text-align: center">
+          <span class="tag" style="margin-bottom: 16px; display: inline-block"
+            >Why choose us</span
+          >
+          <h2 class="section-title" style="margin-bottom: 56px">
+            Made with intention,<br />crafted with care
+          </h2>
+          <div
+            style="
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+              gap: 32px;
+            "
+          >
+            <div
+              style="
+                text-align: center;
+                padding: 32px 24px;
+                border-radius: 20px;
+                background: var(--cream);
+              "
+            >
+              <div style="font-size: 2.5rem; margin-bottom: 16px">🌿</div>
+              <h3 class="serif" style="font-size: 1.25rem; margin-bottom: 8px">
+                Natural Ingredients
+              </h3>
+              <p
+                style="
+                  font-size: 0.85rem;
+                  color: var(--text-mid);
+                  line-height: 1.6;
+                "
+              >
+                Every ingredient is thoughtfully chosen — no fillers, no
+                synthetics, no compromises.
+              </p>
+            </div>
+            <div
+              style="
+                text-align: center;
+                padding: 32px 24px;
+                border-radius: 20px;
+                background: var(--cream);
+              "
+            >
+              <div style="font-size: 2.5rem; margin-bottom: 16px">👐</div>
+              <h3 class="serif" style="font-size: 1.25rem; margin-bottom: 8px">
+                Handmade by Elena
+              </h3>
+              <p
+                style="
+                  font-size: 0.85rem;
+                  color: var(--text-mid);
+                  line-height: 1.6;
+                "
+              >
+                Each jar is poured and packed by hand — you can feel the
+                difference when care is the main ingredient.
+              </p>
+            </div>
+            <div
+              style="
+                text-align: center;
+                padding: 32px 24px;
+                border-radius: 20px;
+                background: var(--cream);
+              "
+            >
+              <div style="font-size: 2.5rem; margin-bottom: 16px">🐰</div>
+              <h3 class="serif" style="font-size: 1.25rem; margin-bottom: 8px">
+                Cruelty-Free & Vegan
+              </h3>
+              <p
+                style="
+                  font-size: 0.85rem;
+                  color: var(--text-mid);
+                  line-height: 1.6;
+                "
+              >
+                Always cruelty-free. Always vegan. Kindness is built into every
+                formula we create.
+              </p>
+            </div>
+            <div
+              style="
+                text-align: center;
+                padding: 32px 24px;
+                border-radius: 20px;
+                background: var(--cream);
+              "
+            >
+              <div style="font-size: 2.5rem; margin-bottom: 16px">📦</div>
+              <h3 class="serif" style="font-size: 1.25rem; margin-bottom: 8px">
+                Ships from My Kitchen
+              </h3>
+              <p
+                style="
+                  font-size: 0.85rem;
+                  color: var(--text-mid);
+                  line-height: 1.6;
+                "
+              >
+                Orders ship within 2 business days, packed with love and a
+                personal thank-you note.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured Products -->
+      <section style="padding: 80px 24px; background: var(--cream)">
+        <div style="max-width: 1200px; margin: 0 auto">
+          <div style="text-align: center; margin-bottom: 48px">
+            <span class="tag" style="margin-bottom: 16px; display: inline-block"
+              >Our bestsellers</span
+            >
+            <h2 class="section-title">Community favorites</h2>
+          </div>
+          <div
+            id="featuredGrid"
+            style="
+              display: grid;
+              grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+              gap: 24px;
+            "
+          ></div>
+          <div style="text-align: center; margin-top: 44px">
+            <button
+              class="btn-outline"
+              onclick="showView('shop')"
+              style="font-size: 0.9rem; padding: 13px 36px"
+            >
+              View All Products →
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Reviews -->
+      <section style="padding: 80px 24px; background: #fff">
+        <div style="max-width: 1100px; margin: 0 auto">
+          <div style="text-align: center; margin-bottom: 48px">
+            <span class="tag" style="margin-bottom: 16px; display: inline-block"
+              >Customer love</span
+            >
+            <h2 class="section-title">Real people,<br />real results</h2>
+          </div>
+          <div
+            style="
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+              gap: 24px;
+            "
+            id="homeReviews"
+          ></div>
+        </div>
+      </section>
+
+      <!-- Newsletter -->
+      <section
+        style="
+          padding: 80px 24px;
+          background: linear-gradient(135deg, #4e6b4e, #6b8e6b);
+        "
+      >
+        <div style="max-width: 560px; margin: 0 auto; text-align: center">
+          <div style="font-size: 2rem; margin-bottom: 16px">🌸</div>
+          <h2
+            class="serif"
+            style="
+              font-size: 2.2rem;
+              color: #fff;
+              font-weight: 400;
+              margin-bottom: 12px;
+            "
+          >
+            Join the Self-Care Circle
+          </h2>
+          <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 8px">
+            Get 10% off your first order + early access to new scents and
+            seasonal drops.
+          </p>
+          <p
+            style="
+              color: rgba(255, 255, 255, 0.65);
+              font-size: 0.8rem;
+              margin-bottom: 32px;
+            "
+          >
+            No spam. Unsubscribe anytime. Just gentle, intentional emails.
+          </p>
+          <div id="newsletterForm">
+            <div
+              style="
+                display: flex;
+                gap: 10px;
+                max-width: 400px;
+                margin: 0 auto;
+                flex-wrap: wrap;
+              "
+            >
+              <input
+                id="newsletterEmail"
+                type="email"
+                placeholder="your@email.com"
+                style="
+                  flex: 1;
+                  min-width: 200px;
+                  padding: 13px 20px;
+                  border-radius: 30px;
+                  border: none;
+                  font-family: &quot;Jost&quot;, sans-serif;
+                  font-size: 0.9rem;
+                  outline: none;
+                "
+              />
+              <button
+                class="btn-sage"
+                style="
+                  background: #fff;
+                  color: var(--sage-dark);
+                  padding: 13px 28px;
+                "
+                onclick="subscribeNewsletter()"
+              >
+                Join Free →
+              </button>
+            </div>
+          </div>
+          <div id="newsletterSuccess" style="display: none; color: #fff">
+            <div style="font-size: 2rem; margin-bottom: 12px">✨</div>
+            <p style="font-size: 1.1rem; font-weight: 500">
+              Welcome to the circle!
+            </p>
+            <p style="font-size: 0.85rem; opacity: 0.85">
+              Check your inbox for your 10% off code. Can't wait to share our
+              next batch with you.
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ===== SHOP VIEW ===== -->
+    <div id="view-shop" class="view">
+      <div style="max-width: 1280px; margin: 0 auto; padding: 48px 24px">
+        <div style="margin-bottom: 36px">
+          <h1 class="section-title">All Products</h1>
+          <p style="color: var(--text-mid); margin-top: 8px">
+            Small-batch, handcrafted with love. Every jar made to order.
+          </p>
+        </div>
+        <div
+          style="
+            display: flex;
+            gap: 32px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+          "
+        >
+          <!-- Filter Sidebar -->
+          <div
+            class="filter-sidebar"
+            style="width: 220px; flex-shrink: 0; position: sticky; top: 84px"
+          >
+            <h4
+              style="
+                font-size: 0.75rem;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color: var(--text-light);
+                margin-bottom: 16px;
+              "
+            >
+              Product Type
+            </h4>
+            <div
+              style="
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                margin-bottom: 28px;
+              "
+            >
+              <label
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 8px;
+                  cursor: pointer;
+                  font-size: 0.88rem;
+                "
+              >
+                <input
+                  type="radio"
+                  name="catFilter"
+                  value="All"
+                  checked
+                  onchange="applyFilters()"
+                  style="accent-color: var(--sage)"
+                />
+                All Products
+              </label>
+              <label
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 8px;
+                  cursor: pointer;
+                  font-size: 0.88rem;
+                "
+              >
+                <input
+                  type="radio"
+                  name="catFilter"
+                  value="Lotion"
+                  onchange="applyFilters()"
+                  style="accent-color: var(--sage)"
+                />
+                Lotions
+              </label>
+              <label
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 8px;
+                  cursor: pointer;
+                  font-size: 0.88rem;
+                "
+              >
+                <input
+                  type="radio"
+                  name="catFilter"
+                  value="Bath Salts"
+                  onchange="applyFilters()"
+                  style="accent-color: var(--sage)"
+                />
+                Bath Salts
+              </label>
+            </div>
+
+            <h4
+              style="
+                font-size: 0.75rem;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color: var(--text-light);
+                margin-bottom: 12px;
+              "
+            >
+              Scent
+            </h4>
+            <div
+              id="scentChips"
+              style="
+                display: flex;
+                flex-wrap: wrap;
+                gap: 6px;
+                margin-bottom: 28px;
+              "
+            ></div>
+
+            <h4
+              style="
+                font-size: 0.75rem;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color: var(--text-light);
+                margin-bottom: 12px;
+              "
+            >
+              Benefit
+            </h4>
+            <div
+              id="benefitChips"
+              style="
+                display: flex;
+                flex-wrap: wrap;
+                gap: 6px;
+                margin-bottom: 28px;
+              "
+            ></div>
+
+            <h4
+              style="
+                font-size: 0.75rem;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color: var(--text-light);
+                margin-bottom: 12px;
+              "
+            >
+              Max Price
+            </h4>
+            <input
+              type="range"
+              id="priceRange"
+              min="15"
+              max="55"
+              value="55"
+              oninput="
+                updatePriceLabel(this.value);
+                applyFilters();
+              "
+              style="width: 100%"
+            />
+            <div
+              style="
+                font-size: 0.82rem;
+                color: var(--text-mid);
+                margin-top: 6px;
+              "
+            >
+              Up to: <span id="priceLabel">$55</span>
+            </div>
+            <button
+              class="btn-outline"
+              style="
+                width: 100%;
+                margin-top: 20px;
+                font-size: 0.78rem;
+                padding: 9px;
+              "
+              onclick="clearFilters()"
+            >
+              Clear Filters
+            </button>
+          </div>
+
+          <!-- Products Area -->
+          <div style="flex: 1; min-width: 0">
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 24px;
+                flex-wrap: wrap;
+                gap: 12px;
+              "
+            >
+              <div style="font-size: 0.85rem; color: var(--text-mid)">
+                <span id="productCount">0</span> products
+              </div>
+              <select
+                id="sortSelect"
+                onchange="applyFilters()"
+                style="
+                  border: 1.5px solid #ddd;
+                  border-radius: 20px;
+                  padding: 8px 16px;
+                  font-family: &quot;Jost&quot;, sans-serif;
+                  font-size: 0.82rem;
+                  background: #fff;
+                  outline: none;
+                  color: var(--text-dark);
+                "
+              >
+                <option value="best">Best Sellers</option>
+                <option value="newest">Newest</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+              </select>
+            </div>
+            <div
+              id="shopGrid"
+              style="
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+                gap: 20px;
+              "
+            ></div>
+            <div
+              id="shopEmpty"
+              style="
+                display: none;
+                text-align: center;
+                padding: 80px 20px;
+                color: var(--text-light);
+              "
+            >
+              <div style="font-size: 3rem; margin-bottom: 16px">🔍</div>
+              <p style="font-size: 1.05rem">No products match your filters.</p>
+              <button
+                class="btn-outline"
+                style="margin-top: 20px"
+                onclick="clearFilters()"
+              >
+                Clear Filters
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== BUNDLES VIEW ===== -->
+    <div id="view-bundles" class="view">
+      <div style="max-width: 1100px; margin: 0 auto; padding: 48px 24px">
+        <div style="text-align: center; margin-bottom: 56px">
+          <span class="tag" style="margin-bottom: 16px; display: inline-block"
+            >Perfect gifts</span
+          >
+          <h1 class="section-title">Gift Sets & Bundles</h1>
+          <p
+            style="
+              color: var(--text-mid);
+              margin-top: 12px;
+              max-width: 500px;
+              margin-left: auto;
+              margin-right: auto;
+            "
+          >
+            Curated combinations for every ritual. Save when you shop together —
+            perfect for gifting or treating yourself.
+          </p>
+        </div>
+        <div
+          id="bundlesGrid"
+          style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 28px;
+          "
+        ></div>
+      </div>
+    </div>
+
+    <!-- ===== OUR STORY VIEW ===== -->
+    <div id="view-story" class="view">
+      <div style="max-width: 900px; margin: 0 auto; padding: 48px 24px">
+        <div style="text-align: center; margin-bottom: 56px">
+          <span class="tag" style="margin-bottom: 16px; display: inline-block"
+            >How it all began</span
+          >
+          <h1 class="section-title">From My Kitchen<br />to Your Tub</h1>
+        </div>
+
+        <!-- Elena's story -->
+        <div
+          style="
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            margin-bottom: 60px;
+          "
+        >
+          <div
+            style="
+              width: 280px;
+              flex-shrink: 0;
+              border-radius: 20px;
+              background: linear-gradient(145deg, #d4e4d4, #e8dff0);
+              height: 340px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 6rem;
+            "
+          >
+            👩‍🍳
+          </div>
+          <div style="flex: 1; min-width: 240px">
+            <h2
+              class="serif"
+              style="font-size: 2rem; margin-bottom: 20px; font-weight: 400"
+            >
+              Hi, I'm Elena.
+            </h2>
+            <p
+              style="
+                color: var(--text-mid);
+                line-height: 1.8;
+                margin-bottom: 16px;
+              "
+            >
+              In 2022, I was going through a really stressful chapter of my
+              life. My skin was reacting badly to everything — commercial
+              lotions, fancy serums — nothing helped. My grandmother used to
+              make simple salves from herbs in her garden, so I started
+              experimenting.
+            </p>
+            <p
+              style="
+                color: var(--text-mid);
+                line-height: 1.8;
+                margin-bottom: 16px;
+              "
+            >
+              What began as a small pot of shea butter and lavender essential
+              oil on my stove turned into something I couldn't stop sharing with
+              friends and family. They kept asking for more. Their skin calmed
+              down. They slept better. They felt taken care of.
+            </p>
+            <p style="color: var(--text-mid); line-height: 1.8">
+              Willow & Sage Co. was born from that belief: that self-care
+              doesn't need to be complicated, expensive, or full of ingredients
+              you can't pronounce. It just needs to be honest, gentle, and made
+              with love.
+            </p>
+            <div
+              style="
+                margin-top: 24px;
+                font-style: italic;
+                font-family: &quot;Cormorant Garamond&quot;, serif;
+                font-size: 1.1rem;
+                color: var(--sage);
+              "
+            >
+              — Elena Voss, Founder
+            </div>
+          </div>
+        </div>
+
+        <!-- Process -->
+        <div
+          style="
+            background: #fff;
+            border-radius: 24px;
+            padding: 48px;
+            margin-bottom: 60px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+          "
+        >
+          <h2
+            class="serif"
+            style="
+              font-size: 1.8rem;
+              margin-bottom: 36px;
+              font-weight: 400;
+              text-align: center;
+            "
+          >
+            The Process
+          </h2>
+          <div style="display: flex; flex-direction: column; gap: 32px">
+            <div class="process-step">
+              <div class="process-num">1</div>
+              <div>
+                <h4 style="font-weight: 600; margin-bottom: 6px">
+                  Source the finest ingredients
+                </h4>
+                <p
+                  style="
+                    color: var(--text-mid);
+                    font-size: 0.9rem;
+                    line-height: 1.6;
+                  "
+                >
+                  Every ingredient is hand-selected from trusted, ethical
+                  suppliers. Himalayan salts from Pakistan, shea butter from
+                  Ghana, essential oils from family farms.
+                </p>
+              </div>
+            </div>
+            <div class="process-step">
+              <div class="process-num">2</div>
+              <div>
+                <h4 style="font-weight: 600; margin-bottom: 6px">
+                  Mix in small batches
+                </h4>
+                <p
+                  style="
+                    color: var(--text-mid);
+                    font-size: 0.9rem;
+                    line-height: 1.6;
+                  "
+                >
+                  No giant vats or automated machines. Every batch is blended by
+                  hand in my kitchen using carefully calibrated measurements and
+                  the same recipe I refined over 18 months.
+                </p>
+              </div>
+            </div>
+            <div class="process-step">
+              <div class="process-num">3</div>
+              <div>
+                <h4 style="font-weight: 600; margin-bottom: 6px">
+                  Rest & quality check
+                </h4>
+                <p
+                  style="
+                    color: var(--text-mid);
+                    font-size: 0.9rem;
+                    line-height: 1.6;
+                  "
+                >
+                  Lotions need 24 hours to set. Bath salts are checked for scent
+                  balance. Nothing leaves my kitchen unless it meets my
+                  standards — which are high.
+                </p>
+              </div>
+            </div>
+            <div class="process-step">
+              <div class="process-num">4</div>
+              <div>
+                <h4 style="font-weight: 600; margin-bottom: 6px">
+                  Pack with love & ship fast
+                </h4>
+                <p
+                  style="
+                    color: var(--text-mid);
+                    font-size: 0.9rem;
+                    line-height: 1.6;
+                  "
+                >
+                  Each order is packed by hand, wrapped in recycled tissue
+                  paper, and includes a personal thank-you card. Ships within 2
+                  business days.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Values -->
+        <div style="text-align: center; margin-bottom: 36px">
+          <h2
+            class="serif"
+            style="font-size: 1.8rem; margin-bottom: 32px; font-weight: 400"
+          >
+            What we stand for
+          </h2>
+          <div
+            style="
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+              gap: 20px;
+            "
+          >
+            <div
+              style="
+                padding: 24px;
+                background: var(--cream);
+                border-radius: 16px;
+                text-align: center;
+              "
+            >
+              🌱
+              <div
+                style="font-weight: 600; margin-top: 10px; font-size: 0.9rem"
+              >
+                Small-batch only
+              </div>
+              <p
+                style="
+                  font-size: 0.8rem;
+                  color: var(--text-light);
+                  margin-top: 6px;
+                "
+              >
+                Never scaled, never rushed
+              </p>
+            </div>
+            <div
+              style="
+                padding: 24px;
+                background: var(--cream);
+                border-radius: 16px;
+                text-align: center;
+              "
+            >
+              🚫
+              <div
+                style="font-weight: 600; margin-top: 10px; font-size: 0.9rem"
+              >
+                No fillers ever
+              </div>
+              <p
+                style="
+                  font-size: 0.8rem;
+                  color: var(--text-light);
+                  margin-top: 6px;
+                "
+              >
+                What you see is what's in the jar
+              </p>
+            </div>
+            <div
+              style="
+                padding: 24px;
+                background: var(--cream);
+                border-radius: 16px;
+                text-align: center;
+              "
+            >
+              🌍
+              <div
+                style="font-weight: 600; margin-top: 10px; font-size: 0.9rem"
+              >
+                Ethically sourced
+              </div>
+              <p
+                style="
+                  font-size: 0.8rem;
+                  color: var(--text-light);
+                  margin-top: 6px;
+                "
+              >
+                Fair suppliers, fair prices
+              </p>
+            </div>
+            <div
+              style="
+                padding: 24px;
+                background: var(--cream);
+                border-radius: 16px;
+                text-align: center;
+              "
+            >
+              ♻️
+              <div
+                style="font-weight: 600; margin-top: 10px; font-size: 0.9rem"
+              >
+                Eco packaging
+              </div>
+              <p
+                style="
+                  font-size: 0.8rem;
+                  color: var(--text-light);
+                  margin-top: 6px;
+                "
+              >
+                Glass, recycled paper, no plastic
+              </p>
+            </div>
+            <div
+              style="
+                padding: 24px;
+                background: var(--cream);
+                border-radius: 16px;
+                text-align: center;
+              "
+            >
+              🐰
+              <div
+                style="font-weight: 600; margin-top: 10px; font-size: 0.9rem"
+              >
+                Always cruelty-free
+              </div>
+              <p
+                style="
+                  font-size: 0.8rem;
+                  color: var(--text-light);
+                  margin-top: 6px;
+                "
+              >
+                Certified vegan, always
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== JOURNAL VIEW ===== -->
+    <div id="view-journal" class="view">
+      <div style="max-width: 1100px; margin: 0 auto; padding: 48px 24px">
+        <div style="text-align: center; margin-bottom: 48px">
+          <span class="tag" style="margin-bottom: 16px; display: inline-block"
+            >Self-care wisdom</span
+          >
+          <h1 class="section-title">The Willow & Sage Journal</h1>
+          <p style="color: var(--text-mid); margin-top: 12px">
+            Tips, rituals, and behind-the-scenes from Elena's kitchen.
+          </p>
+        </div>
+        <div class="masonry" id="journalGrid"></div>
+      </div>
+    </div>
+
+    <!-- ===== CONTACT VIEW ===== -->
+    <div id="view-contact" class="view">
+      <div style="max-width: 680px; margin: 0 auto; padding: 48px 24px">
+        <div style="text-align: center; margin-bottom: 48px">
+          <span class="tag" style="margin-bottom: 16px; display: inline-block"
+            >Get in touch</span
+          >
+          <h1 class="section-title">Say Hello</h1>
+          <p
+            style="
+              color: var(--text-mid);
+              margin-top: 12px;
+              font-style: italic;
+              font-family: &quot;Cormorant Garamond&quot;, serif;
+              font-size: 1.1rem;
+            "
+          >
+            "I personally read every message." — Elena
+          </p>
+        </div>
+        <div
+          style="
+            background: #fff;
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+          "
+        >
+          <div style="display: grid; gap: 20px">
+            <div>
+              <label
+                style="
+                  font-size: 0.8rem;
+                  letter-spacing: 0.08em;
+                  text-transform: uppercase;
+                  color: var(--text-light);
+                  display: block;
+                  margin-bottom: 8px;
+                "
+                >Your Name</label
+              >
+              <input
+                id="cName"
+                type="text"
+                placeholder="Elena Voss"
+                style="
+                  width: 100%;
+                  padding: 13px 18px;
+                  border: 1.5px solid #ddd;
+                  border-radius: 12px;
+                  font-family: &quot;Jost&quot;, sans-serif;
+                  font-size: 0.92rem;
+                  outline: none;
+                  transition: border 0.3s;
+                "
+                onfocus="this.style.borderColor = 'var(--sage)'"
+                onblur="this.style.borderColor = '#ddd'"
+              />
+            </div>
+            <div>
+              <label
+                style="
+                  font-size: 0.8rem;
+                  letter-spacing: 0.08em;
+                  text-transform: uppercase;
+                  color: var(--text-light);
+                  display: block;
+                  margin-bottom: 8px;
+                "
+                >Email</label
+              >
+              <input
+                id="cEmail"
+                type="email"
+                placeholder="you@email.com"
+                style="
+                  width: 100%;
+                  padding: 13px 18px;
+                  border: 1.5px solid #ddd;
+                  border-radius: 12px;
+                  font-family: &quot;Jost&quot;, sans-serif;
+                  font-size: 0.92rem;
+                  outline: none;
+                  transition: border 0.3s;
+                "
+                onfocus="this.style.borderColor = 'var(--sage)'"
+                onblur="this.style.borderColor = '#ddd'"
+              />
+            </div>
+            <div>
+              <label
+                style="
+                  font-size: 0.8rem;
+                  letter-spacing: 0.08em;
+                  text-transform: uppercase;
+                  color: var(--text-light);
+                  display: block;
+                  margin-bottom: 8px;
+                "
+                >Subject</label
+              >
+              <select
+                id="cSubject"
+                style="
+                  width: 100%;
+                  padding: 13px 18px;
+                  border: 1.5px solid #ddd;
+                  border-radius: 12px;
+                  font-family: &quot;Jost&quot;, sans-serif;
+                  font-size: 0.92rem;
+                  outline: none;
+                  background: #fff;
+                  color: var(--text-dark);
+                "
+              >
+                <option>General Question</option>
+                <option>Custom Scent Request</option>
+                <option>Wholesale Inquiry</option>
+                <option>Press & Media</option>
+                <option>Shipping Question</option>
+              </select>
+            </div>
+            <div>
+              <label
+                style="
+                  font-size: 0.8rem;
+                  letter-spacing: 0.08em;
+                  text-transform: uppercase;
+                  color: var(--text-light);
+                  display: block;
+                  margin-bottom: 8px;
+                "
+                >Message</label
+              >
+              <textarea
+                id="cMsg"
+                rows="5"
+                placeholder="Tell me everything..."
+                style="
+                  width: 100%;
+                  padding: 13px 18px;
+                  border: 1.5px solid #ddd;
+                  border-radius: 12px;
+                  font-family: &quot;Jost&quot;, sans-serif;
+                  font-size: 0.92rem;
+                  outline: none;
+                  resize: vertical;
+                  transition: border 0.3s;
+                "
+                onfocus="this.style.borderColor = 'var(--sage)'"
+                onblur="this.style.borderColor = '#ddd'"
+              ></textarea>
+            </div>
+            <button
+              class="btn-sage"
+              style="padding: 14px; font-size: 0.92rem"
+              onclick="submitContact()"
+            >
+              Send Message →
+            </button>
+          </div>
+        </div>
+        <div
+          style="
+            text-align: center;
+            margin-top: 36px;
+            padding: 24px;
+            background: var(--lavender-light);
+            border-radius: 16px;
+          "
+        >
+          <div style="font-size: 1.3rem; margin-bottom: 8px">☕</div>
+          <h4 class="serif" style="font-size: 1.2rem; margin-bottom: 8px">
+            Custom Scent Consultation
+          </h4>
+          <p
+            style="
+              font-size: 0.85rem;
+              color: var(--text-mid);
+              margin-bottom: 16px;
+            "
+          >
+            Want a custom blend just for you? Book a 20-min call with Elena.
+          </p>
+          <button
+            class="btn-outline"
+            onclick="
+              showToast('📅 Calendly link coming soon! Email us for now.')
+            "
+          >
+            Book a Call (Calendly)
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== FAQ VIEW ===== -->
+    <div id="view-faq" class="view">
+      <div style="max-width: 720px; margin: 0 auto; padding: 48px 24px">
+        <div style="text-align: center; margin-bottom: 48px">
+          <h1 class="section-title">Frequently Asked Questions</h1>
+        </div>
+        <div
+          id="faqList"
+          style="display: flex; flex-direction: column; gap: 12px"
+        ></div>
+      </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer
+      style="
+        background: var(--text-dark);
+        color: rgba(255, 255, 255, 0.75);
+        padding: 60px 24px 32px;
+      "
+    >
+      <div style="max-width: 1100px; margin: 0 auto">
+        <div
+          style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 40px;
+            margin-bottom: 48px;
+          "
+        >
+          <div>
+            <div
+              style="
+                font-family: &quot;Cormorant Garamond&quot;, serif;
+                font-size: 1.5rem;
+                color: #fff;
+                margin-bottom: 8px;
+              "
+            >
+              Willow & Sage Co.
+            </div>
+            <p style="font-size: 0.82rem; line-height: 1.7; max-width: 200px">
+              Handcrafted self-care, made with love in small batches. Est. 2022.
+            </p>
+            <div style="display: flex; gap: 14px; margin-top: 20px">
+              <span style="cursor: pointer; font-size: 1.2rem" title="Instagram"
+                >📸</span
+              >
+              <span style="cursor: pointer; font-size: 1.2rem" title="TikTok"
+                >🎵</span
+              >
+              <span style="cursor: pointer; font-size: 1.2rem" title="Pinterest"
+                >📌</span
+              >
+            </div>
+          </div>
+          <div>
+            <h4
+              style="
+                color: #fff;
+                font-size: 0.75rem;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                margin-bottom: 16px;
+              "
+            >
+              Shop
+            </h4>
+            <div style="display: flex; flex-direction: column; gap: 10px">
+              <a
+                onclick="showView('shop')"
+                style="
+                  cursor: pointer;
+                  font-size: 0.85rem;
+                  transition: color 0.2s;
+                "
+                onmouseover="this.style.color = '#fff'"
+                onmouseout="this.style.color = 'rgba(255,255,255,.75)'"
+                >All Products</a
+              >
+              <a
+                onclick="filterCat('Lotion')"
+                style="
+                  cursor: pointer;
+                  font-size: 0.85rem;
+                  transition: color 0.2s;
+                "
+                onmouseover="this.style.color = '#fff'"
+                onmouseout="this.style.color = 'rgba(255,255,255,.75)'"
+                >Lotions</a
+              >
+              <a
+                onclick="filterCat('Bath Salts')"
+                style="
+                  cursor: pointer;
+                  font-size: 0.85rem;
+                  transition: color 0.2s;
+                "
+                onmouseover="this.style.color = '#fff'"
+                onmouseout="this.style.color = 'rgba(255,255,255,.75)'"
+                >Bath Salts</a
+              >
+              <a
+                onclick="showView('bundles')"
+                style="
+                  cursor: pointer;
+                  font-size: 0.85rem;
+                  transition: color 0.2s;
+                "
+                onmouseover="this.style.color = '#fff'"
+                onmouseout="this.style.color = 'rgba(255,255,255,.75)'"
+                >Gift Bundles</a
+              >
+            </div>
+          </div>
+          <div>
+            <h4
+              style="
+                color: #fff;
+                font-size: 0.75rem;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                margin-bottom: 16px;
+              "
+            >
+              Learn
+            </h4>
+            <div style="display: flex; flex-direction: column; gap: 10px">
+              <a
+                onclick="showView('story')"
+                style="
+                  cursor: pointer;
+                  font-size: 0.85rem;
+                  transition: color 0.2s;
+                "
+                onmouseover="this.style.color = '#fff'"
+                onmouseout="this.style.color = 'rgba(255,255,255,.75)'"
+                >Our Story</a
+              >
+              <a
+                onclick="showView('journal')"
+                style="
+                  cursor: pointer;
+                  font-size: 0.85rem;
+                  transition: color 0.2s;
+                "
+                onmouseover="this.style.color = '#fff'"
+                onmouseout="this.style.color = 'rgba(255,255,255,.75)'"
+                >Journal</a
+              >
+              <a
+                onclick="showView('faq')"
+                style="
+                  cursor: pointer;
+                  font-size: 0.85rem;
+                  transition: color 0.2s;
+                "
+                onmouseover="this.style.color = '#fff'"
+                onmouseout="this.style.color = 'rgba(255,255,255,.75)'"
+                >FAQ</a
+              >
+              <a
+                onclick="showView('contact')"
+                style="
+                  cursor: pointer;
+                  font-size: 0.85rem;
+                  transition: color 0.2s;
+                "
+                onmouseover="this.style.color = '#fff'"
+                onmouseout="this.style.color = 'rgba(255,255,255,.75)'"
+                >Contact</a
+              >
+            </div>
+          </div>
+          <div>
+            <h4
+              style="
+                color: #fff;
+                font-size: 0.75rem;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                margin-bottom: 16px;
+              "
+            >
+              Trust & Safety
+            </h4>
+            <div style="display: flex; flex-direction: column; gap: 10px">
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 8px;
+                  font-size: 0.82rem;
+                "
+              >
+                🔒 Secure checkout
+              </div>
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 8px;
+                  font-size: 0.82rem;
+                "
+              >
+                🐰 Cruelty-free certified
+              </div>
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 8px;
+                  font-size: 0.82rem;
+                "
+              >
+                🌱 100% vegan
+              </div>
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 8px;
+                  font-size: 0.82rem;
+                "
+              >
+                ♻️ Eco packaging
+              </div>
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 8px;
+                  font-size: 0.82rem;
+                "
+              >
+                📦 Ships in 2 days
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          style="
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+          "
+        >
+          <p style="font-size: 0.78rem">
+            © 2024 Willow & Sage Co. Made with love in a small kitchen in
+            Vermont.
+          </p>
+          <p style="font-size: 0.78rem">Privacy · Returns · Shipping Policy</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ===== PRODUCT DETAIL MODAL ===== -->
+    <div class="modal-overlay" id="productModal">
+      <div class="modal-box" style="padding: 0">
+        <button
+          onclick="closeProductModal()"
+          style="
+            position: sticky;
+            top: 16px;
+            left: calc(100% - 56px);
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          "
+        >
+          ✕
+        </button>
+        <div
+          id="productModalContent"
+          style="padding: 0 32px 32px; margin-top: -40px"
+        ></div>
+      </div>
+    </div>
+
+    <!-- ===== JOURNAL MODAL ===== -->
+    <div class="modal-overlay" id="journalModal">
+      <div class="modal-box" style="max-width: 720px">
+        <div style="padding: 32px">
+          <button
+            onclick="closeJournalModal()"
+            style="
+              float: right;
+              background: none;
+              border: none;
+              font-size: 1.3rem;
+              cursor: pointer;
+              color: var(--text-mid);
+            "
+          >
+            ✕
+          </button>
+          <div id="journalModalContent"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== CHECKOUT MODAL ===== -->
+    <div class="modal-overlay" id="checkoutModal">
+      <div class="modal-box" style="max-width: 560px">
+        <div style="padding: 36px">
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              margin-bottom: 28px;
+            "
+          >
+            <h2 class="serif" style="font-size: 1.8rem; font-weight: 400">
+              Checkout
+            </h2>
+            <button
+              onclick="closeCheckoutModal()"
+              style="
+                background: none;
+                border: none;
+                font-size: 1.3rem;
+                cursor: pointer;
+                color: var(--text-mid);
+              "
+            >
+              ✕
+            </button>
+          </div>
+          <div id="checkoutContent"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== CONTACT SUCCESS MODAL ===== -->
+    <div class="modal-overlay" id="contactModal">
+      <div class="modal-box" style="max-width: 440px; text-align: center">
+        <div style="padding: 48px 36px">
+          <div style="font-size: 3rem; margin-bottom: 16px">💌</div>
+          <h2
+            class="serif"
+            style="font-size: 1.8rem; margin-bottom: 12px; font-weight: 400"
+          >
+            Message sent!
+          </h2>
+          <p
+            style="
+              color: var(--text-mid);
+              line-height: 1.7;
+              margin-bottom: 28px;
+            "
+          >
+            Elena personally reads every message and typically responds within
+            24 hours. Thank you for reaching out!
+          </p>
+          <button
+            class="btn-sage"
+            onclick="
+              document.getElementById('contactModal').classList.remove('open')
+            "
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // ========= DATA =========
+      const products = [
+        {
+          id: 1,
+          name: "Lavender Dreams Body Lotion",
+          category: "Lotion",
+          scent: "Lavender",
+          benefit: "Relaxing",
+          price: 28,
+          emoji: "💜",
+          badge: "Bestseller",
+          description:
+            "Our signature whipped body lotion is a cloud-like blend of organic shea butter, lavender essential oil, and a hint of vanilla. Absorbs in seconds, leaving skin silky-soft and subtly fragrant all day. Perfect for evening rituals or whenever you need a moment of calm.",
+          ingredients: [
+            "Organic shea butter",
+            "Sweet almond oil",
+            "Lavender essential oil",
+            "Beeswax (vegan alt.)",
+            "Vitamin E oil",
+            "Lavender buds (dried)",
+            "Vanilla extract",
+          ],
+          howToUse:
+            "Apply generously to clean, slightly damp skin after bathing. Focus on elbows, knees, and heels. For best results, use within 20 minutes of showering to lock in moisture.",
+          sizes: [
+            { label: "2 oz (travel)", price: 14 },
+            { label: "4 oz (standard)", price: 28 },
+            { label: "8 oz (family)", price: 48 },
+          ],
+          reviews: [
+            {
+              name: "Sarah M.",
+              rating: 5,
+              text: "This lotion has completely changed my bedtime routine. I sleep so much better when I use it before bed. The scent is divine — not overpowering, just perfect.",
+              avatar: "🧖‍♀️",
+            },
+            {
+              name: "Jamie R.",
+              rating: 5,
+              text: "I've tried SO many lotions for my sensitive skin and this is the only one that doesn't make me break out. Elena is a genius.",
+              avatar: "🌸",
+            },
+            {
+              name: "Priya K.",
+              rating: 5,
+              text: "My skin has never felt this soft. I tell everyone about this lotion. It's the real deal.",
+              avatar: "✨",
+            },
+          ],
+        },
+        {
+          id: 2,
+          name: "Himalayan Pink Salt Bath Salts",
+          category: "Bath Salts",
+          scent: "Lavender",
+          benefit: "Relaxing",
+          price: 22,
+          emoji: "🌸",
+          badge: "Bestseller",
+          description:
+            "A luxurious blend of Himalayan pink salt and Epsom salt, infused with dried lavender buds and pure lavender essential oil. Dissolve in a warm bath for the ultimate relaxation ritual. The mineral salts soothe tired muscles while the lavender calms your mind.",
+          ingredients: [
+            "Himalayan pink salt",
+            "Epsom salt (magnesium sulfate)",
+            "Lavender essential oil",
+            "Dried lavender buds",
+            "Jojoba oil",
+            "Coconut oil (fractionated)",
+            "Natural colorant (mica)",
+          ],
+          howToUse:
+            "Add 1–2 cups to warm running bathwater. Soak for 20–30 minutes. For a foot soak, use 1/2 cup in a basin of warm water. Pat dry gently after bathing.",
+          sizes: [
+            { label: "8 oz", price: 22 },
+            { label: "16 oz", price: 38 },
+          ],
+          reviews: [
+            {
+              name: "Lauren B.",
+              rating: 5,
+              text: "These smell absolutely incredible. I use them every Sunday for my self-care bath ritual. The lavender buds are such a beautiful touch.",
+              avatar: "🛁",
+            },
+            {
+              name: "Tanya W.",
+              rating: 4,
+              text: "Great product — genuinely relaxing. The color is so pretty in the water. Only docking one star because I wish the bag were bigger!",
+              avatar: "💕",
+            },
+            {
+              name: "Meg S.",
+              rating: 5,
+              text: "Bought these as a gift for my mom and she loved them so much she ordered her own. We're both obsessed.",
+              avatar: "💐",
+            },
+          ],
+        },
+        {
+          id: 3,
+          name: "Citrus Burst Body Lotion",
+          category: "Lotion",
+          scent: "Citrus",
+          benefit: "Energizing",
+          price: 28,
+          emoji: "🍋",
+          badge: "New",
+          description:
+            "Wake up your skin and your senses with this bright, energizing lotion. A blend of sweet orange, lemon, and grapefruit essential oils in a base of cocoa butter and vitamin E. Morning use essential — it'll brighten your whole mood.",
+          ingredients: [
+            "Organic cocoa butter",
+            "Coconut oil",
+            "Sweet orange essential oil",
+            "Lemon essential oil",
+            "Grapefruit essential oil",
+            "Vitamin E oil",
+            "Aloe vera extract",
+          ],
+          howToUse:
+            "Apply to clean skin in the morning as part of your wake-up ritual. Works beautifully layered with SPF moisturizer. Avoid direct sun exposure immediately after applying citrus oils.",
+          sizes: [
+            { label: "4 oz (standard)", price: 28 },
+            { label: "8 oz (family)", price: 48 },
+          ],
+          reviews: [
+            {
+              name: "Olivia C.",
+              rating: 5,
+              text: "This is my morning alarm clock in a bottle. The citrus scent wakes me up better than coffee. Seriously.",
+              avatar: "🌞",
+            },
+            {
+              name: "Rachel T.",
+              rating: 5,
+              text: "So fresh and light. I was worried it would feel greasy but it absorbs immediately. Perfect for summer.",
+              avatar: "🍋",
+            },
+          ],
+        },
+        {
+          id: 4,
+          name: "Eucalyptus Mint Bath Salts",
+          category: "Bath Salts",
+          scent: "Eucalyptus",
+          benefit: "Reviving",
+          price: 22,
+          emoji: "🌿",
+          description:
+            "A clarifying, spa-inspired blend with Epsom salt, sea salt, eucalyptus, and spearmint essential oils. Perfect after a workout or a long week — it melts tension and leaves you feeling completely renewed.",
+          ingredients: [
+            "Dead Sea salt",
+            "Epsom salt",
+            "Eucalyptus essential oil",
+            "Spearmint essential oil",
+            "Coconut oil (fractionated)",
+            "Dried eucalyptus leaves",
+            "Natural mica (green)",
+          ],
+          howToUse:
+            "Add 1–2 cups to warm bathwater. Inhale deeply as the steam releases the eucalyptus. Soak for 20+ minutes for maximum muscle relief.",
+          sizes: [
+            { label: "8 oz", price: 22 },
+            { label: "16 oz", price: 38 },
+          ],
+          reviews: [
+            {
+              name: "Dan F.",
+              rating: 5,
+              text: "I use this after every long run and it is life-changing. My legs recover so much faster. Highly recommend.",
+              avatar: "🏃‍♂️",
+            },
+            {
+              name: "Kat H.",
+              rating: 5,
+              text: "Eucalyptus in a bath is something I never knew I needed. This feels like a spa treatment at home.",
+              avatar: "🌿",
+            },
+          ],
+        },
+        {
+          id: 5,
+          name: "Unscented Pure Sensitive Lotion",
+          category: "Lotion",
+          scent: "Unscented",
+          benefit: "Soothing",
+          price: 26,
+          emoji: "🤍",
+          badge: "Dermatologist Loved",
+          description:
+            "Stripped back, pure, and powerful. This unscented lotion is Elena's most recommended formula for those with sensitive or reactive skin. Just shea butter, aloe vera, and soothing oat extract. Nothing extra.",
+          ingredients: [
+            "Organic shea butter",
+            "Aloe vera gel",
+            "Colloidal oat extract",
+            "Jojoba oil",
+            "Vitamin E oil",
+            "Chamomile extract",
+            "Distilled water",
+          ],
+          howToUse:
+            "Apply generously to clean skin as needed. Safe for face, body, and even baby skin. Dermatologist tested and recommended for eczema-prone skin.",
+          sizes: [
+            { label: "2 oz (trial)", price: 12 },
+            { label: "4 oz (standard)", price: 26 },
+            { label: "8 oz (value)", price: 44 },
+          ],
+          reviews: [
+            {
+              name: "Anna P.",
+              rating: 5,
+              text: "Finally a lotion that doesn't irritate my eczema. I can't believe how soft my skin feels. I've been searching for something like this for years.",
+              avatar: "🤍",
+            },
+            {
+              name: "Mike D.",
+              rating: 5,
+              text: "Bought this for my wife who has very sensitive skin and she's been using it every day for 3 months. No reactions, just happy skin.",
+              avatar: "💛",
+            },
+          ],
+        },
+        {
+          id: 6,
+          name: "Rose & Chamomile Bath Salts",
+          category: "Bath Salts",
+          scent: "Chamomile",
+          benefit: "Soothing",
+          price: 24,
+          emoji: "🌹",
+          description:
+            "Soft, floral, and deeply comforting. Himalayan salt meets rose petals, chamomile flowers, and sweet almond oil for a bath that feels like a warm hug. Elena's personal favorite for winding down.",
+          ingredients: [
+            "Himalayan pink salt",
+            "Epsom salt",
+            "Rose essential oil",
+            "Chamomile essential oil",
+            "Dried rose petals",
+            "Dried chamomile flowers",
+            "Sweet almond oil",
+          ],
+          howToUse:
+            "Draw a warm bath and add 1–2 cups. Let the petals float. Light a candle. Put your phone down. You've earned this.",
+          sizes: [
+            { label: "8 oz", price: 24 },
+            { label: "16 oz", price: 42 },
+          ],
+          reviews: [
+            {
+              name: "Sophie L.",
+              rating: 5,
+              text: "The rose petals floating in the bath is like something out of a movie. This is pure luxury and the price is so reasonable.",
+              avatar: "🌹",
+            },
+            {
+              name: "Emma R.",
+              rating: 5,
+              text: "I gave this as a gift and the recipient cried happy tears. That's all I need to say.",
+              avatar: "💐",
+            },
+          ],
+        },
+        {
+          id: 7,
+          name: "Vanilla & Honey Body Lotion",
+          category: "Lotion",
+          scent: "Vanilla",
+          benefit: "Moisturizing",
+          price: 30,
+          emoji: "🍯",
+          badge: "Limited",
+          description:
+            "Indulgent, warm, and deeply moisturizing. A rich blend of whipped shea, raw honey extract, and Madagascar vanilla. This lotion is a treat for dry skin and a hug for the soul. Limited seasonal batch.",
+          ingredients: [
+            "Organic shea butter",
+            "Mango butter",
+            "Madagascar vanilla extract",
+            "Raw honey extract",
+            "Argan oil",
+            "Sweet almond oil",
+            "Vitamin E",
+          ],
+          howToUse:
+            "Best used at night for maximum absorption. Apply to damp skin after bathing and let it sink in for 5 minutes before dressing. The honey extract helps lock in moisture overnight.",
+          sizes: [
+            { label: "4 oz (standard)", price: 30 },
+            { label: "8 oz (family)", price: 52 },
+          ],
+          reviews: [
+            {
+              name: "Grace M.",
+              rating: 5,
+              text: "The vanilla scent is warm and sophisticated — not at all sweet or artificial. This is what self-care smells like.",
+              avatar: "🍯",
+            },
+            {
+              name: "Chris B.",
+              rating: 5,
+              text: "My skin was so dry this winter and this lotion has been an absolute game changer. My hands finally look like hands again.",
+              avatar: "✨",
+            },
+          ],
+        },
+        {
+          id: 8,
+          name: "Grapefruit & Sea Salt Scrub Salts",
+          category: "Bath Salts",
+          scent: "Grapefruit",
+          benefit: "Energizing",
+          price: 25,
+          emoji: "🌊",
+          description:
+            "Not just for soaking — these grapefruit-zested sea salts work double duty as a body scrub or bath soak. The bright citrus scent energizes and uplifts while the salts exfoliate and the oils soften.",
+          ingredients: [
+            "Mediterranean sea salt",
+            "Pink Himalayan salt",
+            "Grapefruit essential oil",
+            "Orange peel powder",
+            "Coconut oil",
+            "Sunflower oil",
+            "Vitamin C extract",
+          ],
+          howToUse:
+            "As a scrub: apply to damp skin in the shower, massage gently, rinse. As a soak: dissolve 1–2 cups in warm bathwater. Use 1–2x per week.",
+          sizes: [
+            { label: "8 oz", price: 25 },
+            { label: "16 oz", price: 42 },
+          ],
+          reviews: [
+            {
+              name: "Tyler J.",
+              rating: 5,
+              text: "Best scrub I've ever used. My skin is literally glowing. The grapefruit scent is so uplifting.",
+              avatar: "🌊",
+            },
+            {
+              name: "Maria K.",
+              rating: 4,
+              text: "Love this! Wish there was a bigger size available. I go through it so fast.",
+              avatar: "💫",
+            },
+          ],
+        },
+      ];
+
+      const bundles = [
+        {
+          id: "b1",
+          name: "Evening Wind Down",
+          emoji: "🌙",
+          tagline: "Your bedtime ritual, perfected.",
+          includes: [
+            "Lavender Dreams Body Lotion (4 oz)",
+            "Himalayan Pink Salt Bath Salts (8 oz)",
+          ],
+          productIds: [1, 2],
+          originalPrice: 50,
+          price: 42,
+          description:
+            "Everything you need to transition from a hard day to deep, restful sleep. The lavender duo works together to calm your nervous system and soften your skin.",
+          color: "linear-gradient(135deg, #b8a9c9, #d4cde0)",
+        },
+        {
+          id: "b2",
+          name: "Morning Radiance",
+          emoji: "☀️",
+          tagline: "Start your day glowing.",
+          includes: [
+            "Citrus Burst Body Lotion (4 oz)",
+            "Grapefruit & Sea Salt Scrub Salts (8 oz)",
+          ],
+          productIds: [3, 8],
+          originalPrice: 53,
+          price: 44,
+          description:
+            "An energizing citrus ritual to wake up your skin and your senses. Scrub, soak, and moisturize your way to a radiant morning.",
+          color: "linear-gradient(135deg, #f5d87a, #f5c060)",
+        },
+        {
+          id: "b3",
+          name: "Sensitive Skin Sanctuary",
+          emoji: "🤍",
+          tagline: "Gentle care for reactive skin.",
+          includes: [
+            "Unscented Pure Sensitive Lotion (4 oz)",
+            "Rose & Chamomile Bath Salts (8 oz)",
+          ],
+          productIds: [5, 6],
+          originalPrice: 50,
+          price: 40,
+          description:
+            "The most gentle, calming bundle we offer. Everything unscented or naturally low-fragrance — safe for the most sensitive skin types. Dermatologist recommended.",
+          color: "linear-gradient(135deg, #f5e6e8, #fce4ec)",
+        },
+        {
+          id: "b4",
+          name: "Full Spa-at-Home Kit",
+          emoji: "🛁",
+          tagline: "The complete luxury experience.",
+          includes: [
+            "Lavender Dreams Lotion (4 oz)",
+            "Citrus Burst Lotion (4 oz)",
+            "Himalayan Bath Salts (16 oz)",
+            "Eucalyptus Mint Salts (8 oz)",
+          ],
+          productIds: [1, 3, 2, 4],
+          originalPrice: 100,
+          price: 78,
+          description:
+            "Our most complete kit — four products for every mood and moment. Relax, energize, soothe, or revive. This kit has it all. The ultimate gift for someone you love (or yourself).",
+          color: "linear-gradient(135deg, #8aaa8a, #6B8E6B)",
+        },
+      ];
+
+      const journalPosts = [
+        {
+          id: 1,
+          emoji: "🌙",
+          title: "5 Ways to Use Our Lavender Bath Salts for Better Sleep",
+          excerpt:
+            "Sleep hygiene goes beyond screens and bedtimes. We explore how a lavender bath ritual 90 minutes before bed can transform your sleep quality — backed by research.",
+          readTime: "5 min read",
+          date: "March 15, 2024",
+          content: `<p style="line-height:1.8;color:var(--text-mid);margin-bottom:20px;">The lavender plant has been used for centuries as a natural sleep aid. In fact, studies have shown that lavender essential oil can reduce anxiety, lower heart rate, and help the body shift into a parasympathetic state — the "rest and digest" mode that allows deep sleep.</p>
+    <p style="line-height:1.8;color:var(--text-mid);margin-bottom:20px;">Here are five ways to integrate our Himalayan Lavender Bath Salts into your sleep routine:</p>
+    <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;margin:24px 0 12px;">1. The 90-Minute Bath Ritual</h3>
+    <p style="line-height:1.8;color:var(--text-mid);margin-bottom:20px;">Research from the University of Texas found that soaking in warm water 90 minutes before bed significantly improves sleep quality. Add two cups of our lavender salts and soak for 20 minutes. The warm water raises your body temperature, and the subsequent drop signals to your body that it's time to sleep.</p>
+    <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;margin:24px 0 12px;">2. The Foot Soak Shortcut</h3>
+    <p style="line-height:1.8;color:var(--text-mid);margin-bottom:20px;">Don't have time for a full bath? Fill a basin with warm water, add half a cup of our salts, and soak your feet for 15–20 minutes. The reflex points in your feet connect to your entire nervous system, and the lavender scent still does its calming work.</p>
+    <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;margin:24px 0 12px;">3. The Bedroom Spritz</h3>
+    <p style="line-height:1.8;color:var(--text-mid);margin-bottom:20px;">Place a small handful of our lavender bath salts in a jar next to your bed. The natural essential oils will slowly diffuse into the air, creating a calming ambient scent as you sleep.</p>`,
+        },
+        {
+          id: 2,
+          emoji: "👩‍🍳",
+          title: "How I Make My Whipped Body Lotion (Behind the Scenes)",
+          excerpt:
+            "A full behind-the-scenes look at how Elena creates each small batch — from sourcing ingredients to the moment she seals the jar.",
+          readTime: "7 min read",
+          date: "February 28, 2024",
+          content: `<p style="line-height:1.8;color:var(--text-mid);margin-bottom:20px;">People ask me all the time: "What do your mornings look like?" The honest answer is: smelling like lavender, covered in shea butter, surrounded by jars. I wouldn't trade it for anything.</p>
+    <p style="line-height:1.8;color:var(--text-mid);margin-bottom:20px;">Here's a full look at how I make a batch of our signature Lavender Dreams Body Lotion — from start to finish.</p>
+    <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;margin:24px 0 12px;">Step 1: Measuring</h3>
+    <p style="line-height:1.8;color:var(--text-mid);margin-bottom:20px;">I weigh every ingredient on a digital kitchen scale — not by volume, but by weight. This ensures consistency batch to batch. My lavender lotion recipe has exactly 7 ingredients and I measure to the gram.</p>
+    <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;margin:24px 0 12px;">Step 2: Melting & Cooling</h3>
+    <p style="line-height:1.8;color:var(--text-mid);margin-bottom:20px;">The shea butter goes into a double boiler over very low heat — just until it melts. High heat destroys the beneficial compounds in raw shea. Once melted, I let it cool to room temperature before whipping.</p>`,
+        },
+        {
+          id: 3,
+          emoji: "🧂",
+          title: "Why I Only Use Himalayan Pink Salt",
+          excerpt:
+            "Not all salts are created equal. Elena explains the difference between Himalayan pink salt, Epsom salt, and sea salt — and why the source matters.",
+          readTime: "4 min read",
+          date: "February 10, 2024",
+          content: `<p style="line-height:1.8;color:var(--text-mid);margin-bottom:20px;">When I started making bath salts, I went down a deep rabbit hole researching salt. Table salt, sea salt, Epsom salt, Dead Sea salt, Himalayan salt — there are so many options and the marketing is confusing.</p>
+    <p style="line-height:1.8;color:var(--text-mid);margin-bottom:20px;">Here's what I learned after 18 months of testing every type on my own skin.</p>
+    <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;margin:24px 0 12px;">Himalayan Pink Salt: The Star</h3>
+    <p style="line-height:1.8;color:var(--text-mid);margin-bottom:20px;">Himalayan pink salt is mined from the Khewra Salt Mine in Pakistan — one of the world's oldest and purest salt deposits. It contains 84 trace minerals that regular sea salt doesn't have. More importantly, it's completely unprocessed. What comes out of the mountain is what goes into your bath.</p>`,
+        },
+        {
+          id: 4,
+          emoji: "👶",
+          title: "A Self-Care Ritual for New Moms",
+          excerpt:
+            "When you're running on no sleep and giving everything to another human, how do you find even 10 minutes for yourself? A gentle guide from one of our most loyal customers.",
+          readTime: "6 min read",
+          date: "January 22, 2024",
+          content: `<p style="line-height:1.8;color:var(--text-mid);margin-bottom:20px;">This post is written in partnership with Kelsey Hartman, a mom of a 6-month-old and one of our most loyal customers. She wanted to share what self-care looks like in the fourth trimester — when you have almost no time but deeply need restoration.</p>
+    <p style="line-height:1.8;color:var(--text-mid);margin-bottom:20px;">"I used to think self-care meant a spa day or a whole afternoon off," Kelsey says. "Now I know it's the 8 minutes in the shower when someone else is holding the baby. Those 8 minutes are sacred."</p>
+    <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;margin:24px 0 12px;">The 8-Minute Ritual</h3>
+    <p style="line-height:1.8;color:var(--text-mid);margin-bottom:20px;">Kelsey recommends keeping our Unscented Lotion on the bathroom counter within arm's reach. "Right when I step out of the shower, I put it on while I'm still a little damp. It takes 30 seconds and the whole day feels more manageable."</p>`,
+        },
+        {
+          id: 5,
+          emoji: "🌸",
+          title: "Seasonal Self-Care: Spring Awakening with Citrus",
+          excerpt:
+            "As the seasons shift, our skin and mood shift too. Here's how to update your self-care ritual for spring with energizing citrus scents and lighter textures.",
+          readTime: "5 min read",
+          date: "March 1, 2024",
+          content: `<p style="line-height:1.8;color:var(--text-mid);margin-bottom:20px;">There's something almost alchemical about the way our mood shifts in spring. The light changes. The air changes. And I find that what my body craves in a self-care ritual completely shifts too.</p>
+    <p style="line-height:1.8;color:var(--text-mid);margin-bottom:20px;">In winter, I want heavy, warming formulas — the Vanilla & Honey lotion, rose bath salts, all the comforting, rich textures. But as the days get longer, I reach for citrus.</p>
+    <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;margin:24px 0 12px;">Why Citrus in Spring?</h3>
+    <p style="line-height:1.8;color:var(--text-mid);margin-bottom:20px;">Citrus essential oils — sweet orange, grapefruit, lemon — have been shown to elevate mood, increase alertness, and reduce stress cortisol. They're essentially sunshine you can put on your skin.</p>`,
+        },
+      ];
+
+      const faqData = [
+        {
+          q: "How long will my order take to arrive?",
+          a: "All orders are made-to-order and ship within 2 business days of purchase. Standard shipping takes 3–5 business days within the US. Expedited shipping is available at checkout.",
+        },
+        {
+          q: "What's the shelf life of your products?",
+          a: "Our lotions have a shelf life of 12 months from the date of purchase when stored in a cool, dry place. Bath salts will last up to 2 years when kept dry and sealed between uses.",
+        },
+        {
+          q: "Can I request a custom scent?",
+          a: "Absolutely! Custom scent requests are one of my favorite parts of this business. Use the contact form to reach out, or book a 20-minute consultation call. Minimum order for custom batches is 3 jars.",
+        },
+        {
+          q: "Are your products safe for sensitive skin?",
+          a: "Yes — especially our Unscented line, which was specifically formulated for sensitive and reactive skin. All our products are free from parabens, phthalates, sulfates, synthetic fragrance, and artificial colorants.",
+        },
+        {
+          q: "Do you offer returns or exchanges?",
+          a: "Because our products are handcrafted food-adjacent items, we can't accept returns for hygiene reasons. However, if you're not satisfied with your order for any reason, please reach out within 14 days of receipt and I'll make it right — refund, exchange, or store credit.",
+        },
+        {
+          q: "Are you truly cruelty-free?",
+          a: "100%. We never test on animals and only source from suppliers who hold the same values. All products are also certified vegan — no beeswax, no lanolin, no animal-derived ingredients.",
+        },
+        {
+          q: "Do you do wholesale?",
+          a: "I'm selectively open to wholesale for boutiques and spas that align with our values. Minimum order is $300. Please reach out via the contact form with 'Wholesale Inquiry' selected.",
+        },
+        {
+          q: "How should I store my products?",
+          a: "Keep all products in a cool, dry place away from direct sunlight and humidity. Avoid storing lotions in the bathroom shower — the humidity can affect the texture. A bedroom nightstand is perfect.",
+        },
+        {
+          q: "Is your packaging eco-friendly?",
+          a: "Yes! We use glass jars, recycled kraft paper labels, and compostable tissue paper. No plastic. The shipping boxes are 100% recycled content. We're always looking for ways to reduce our footprint further.",
+        },
+        {
+          q: "Do you ship internationally?",
+          a: "Currently we only ship within the United States. International shipping is something I'm actively working toward — join the newsletter to be the first to know when it launches!",
+        },
+      ];
+
+      const homeReviewsData = [
+        {
+          name: "Sarah M.",
+          product: "Lavender Lotion",
+          rating: 5,
+          text: "This has completely changed my bedtime routine. I smell like a lavender field and sleep like a baby.",
+          avatar: "🧖‍♀️",
+        },
+        {
+          name: "Kelsey H.",
+          product: "Evening Wind Down Bundle",
+          rating: 5,
+          text: "The bundle was the best purchase I've made in years. New mom here — this is the only self-care I get, and it's perfect.",
+          avatar: "💜",
+        },
+        {
+          name: "Tyler J.",
+          product: "Eucalyptus Bath Salts",
+          rating: 5,
+          text: "I'm a runner and these salts have become non-negotiable after long runs. My recovery is SO much better.",
+          avatar: "🌿",
+        },
+        {
+          name: "Sophie L.",
+          product: "Rose & Chamomile Salts",
+          rating: 5,
+          text: "The rose petals floating in the bath made me feel like royalty. I've been buying this every month for 6 months.",
+          avatar: "🌹",
+        },
+      ];
+
+      // ========= STATE =========
+      let cart = [];
+      let activeScents = [];
+      let activeBenefits = [];
+      let searchQuery = "";
+      const allScents = [
+        "Lavender",
+        "Citrus",
+        "Unscented",
+        "Chamomile",
+        "Eucalyptus",
+        "Vanilla",
+        "Grapefruit",
+      ];
+      const allBenefits = [
+        "Relaxing",
+        "Energizing",
+        "Soothing",
+        "Moisturizing",
+        "Reviving",
+      ];
+
+      // ========= NAVIGATION =========
+      function showView(name) {
+        document
+          .querySelectorAll(".view")
+          .forEach((v) => v.classList.remove("active"));
+        document.getElementById("view-" + name).classList.add("active");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        document
+          .querySelectorAll(".nav-link")
+          .forEach((l) => l.classList.remove("active"));
+      }
+
+      function filterCat(cat) {
+        showView("shop");
+        document.querySelectorAll('input[name="catFilter"]').forEach((r) => {
+          r.checked = r.value === cat;
+        });
+        applyFilters();
+      }
+
+      function openMobileNav() {
+        document.getElementById("mobileNav").classList.add("open");
+      }
+      function closeMobileNav() {
+        document.getElementById("mobileNav").classList.remove("open");
+      }
+
+      // ========= RENDER CHIPS =========
+      function renderChips() {
+        const sc = document.getElementById("scentChips");
+        sc.innerHTML = allScents
+          .map(
+            (s) =>
+              `<span class="chip ${activeScents.includes(s) ? "active" : ""}" onclick="toggleChip('scent','${s}')">${s}</span>`,
+          )
+          .join("");
+        const bc = document.getElementById("benefitChips");
+        bc.innerHTML = allBenefits
+          .map(
+            (b) =>
+              `<span class="chip ${activeBenefits.includes(b) ? "active" : ""}" onclick="toggleChip('benefit','${b}')">${b}</span>`,
+          )
+          .join("");
+      }
+
+      function toggleChip(type, val) {
+        if (type === "scent") {
+          activeScents = activeScents.includes(val)
+            ? activeScents.filter((x) => x !== val)
+            : [...activeScents, val];
+        } else {
+          activeBenefits = activeBenefits.includes(val)
+            ? activeBenefits.filter((x) => x !== val)
+            : [...activeBenefits, val];
+        }
+        renderChips();
+        applyFilters();
+      }
+
+      function clearFilters() {
+        activeScents = [];
+        activeBenefits = [];
+        searchQuery = "";
+        document.getElementById("searchInput").value = "";
+        document.getElementById("priceRange").value = 55;
+        document.getElementById("priceLabel").textContent = "$55";
+        document.querySelectorAll('input[name="catFilter"]').forEach((r) => {
+          r.checked = r.value === "All";
+        });
+        renderChips();
+        applyFilters();
+      }
+
+      function updatePriceLabel(v) {
+        document.getElementById("priceLabel").textContent = "$" + v;
+      }
+      function handleSearch(v) {
+        searchQuery = v.toLowerCase();
+        applyFilters();
+      }
+
+      // ========= APPLY FILTERS =========
+      function applyFilters() {
+        const cat =
+          document.querySelector('input[name="catFilter"]:checked')?.value ||
+          "All";
+        const maxPrice = parseInt(document.getElementById("priceRange").value);
+        const sort = document.getElementById("sortSelect").value;
+
+        let filtered = products.filter((p) => {
+          if (cat !== "All" && p.category !== cat) return false;
+          if (activeScents.length && !activeScents.includes(p.scent))
+            return false;
+          if (activeBenefits.length && !activeBenefits.includes(p.benefit))
+            return false;
+          if (p.price > maxPrice) return false;
+          if (
+            searchQuery &&
+            !p.name.toLowerCase().includes(searchQuery) &&
+            !p.scent.toLowerCase().includes(searchQuery) &&
+            !p.category.toLowerCase().includes(searchQuery)
+          )
+            return false;
+          return true;
+        });
+
+        if (sort === "price-asc") filtered.sort((a, b) => a.price - b.price);
+        else if (sort === "price-desc")
+          filtered.sort((a, b) => b.price - a.price);
+        else if (sort === "newest") filtered.reverse();
+
+        const grid = document.getElementById("shopGrid");
+        const empty = document.getElementById("shopEmpty");
+        document.getElementById("productCount").textContent = filtered.length;
+
+        if (!filtered.length) {
+          grid.innerHTML = "";
+          empty.style.display = "block";
+          return;
+        }
+        empty.style.display = "none";
+        grid.innerHTML = filtered.map((p) => productCard(p, "shop")).join("");
+      }
+
+      // ========= PRODUCT CARD =========
+      function productCard(p, context) {
+        const inCart = cart.find((c) => c.id === p.id);
+        return `<div class="card" style="cursor:pointer;" onclick="openProduct(${p.id})">
+    <div class="product-img" style="position:relative;">
+      <span style="font-size:3.5rem;">${p.emoji}</span>
+      ${p.badge ? `<span style="position:absolute;top:12px;left:12px;background:var(--sage);color:#fff;font-size:.68rem;padding:3px 10px;border-radius:20px;letter-spacing:.06em;">${p.badge}</span>` : ""}
+    </div>
+    <div style="padding:16px;">
+      <div class="tag" style="font-size:.68rem;margin-bottom:8px;">${p.category}</div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:500;margin-bottom:6px;line-height:1.3;">${p.name}</h3>
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:12px;">
+        <span class="star" style="font-size:.8rem;">★★★★★</span>
+        <span style="font-size:.75rem;color:var(--text-light);">(${p.reviews.length})</span>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <div style="font-size:1.15rem;font-weight:600;color:var(--sage-dark);">$${p.price}</div>
+        <button class="btn-sage" style="padding:8px 16px;font-size:.75rem;" onclick="event.stopPropagation();quickAdd(${p.id})">+ Add</button>
+      </div>
+    </div>
+  </div>`;
+      }
+
+      // ========= FEATURED GRID =========
+      function renderFeatured() {
+        const featured = products.slice(0, 6);
+        document.getElementById("featuredGrid").innerHTML = featured
+          .map((p) => productCard(p, "home"))
+          .join("");
+      }
+
+      // ========= HOME REVIEWS =========
+      function renderHomeReviews() {
+        document.getElementById("homeReviews").innerHTML = homeReviewsData
+          .map(
+            (r) => `
+    <div class="review-card">
+      <div class="star" style="font-size:.9rem;margin-bottom:12px;">${"★".repeat(r.rating)}</div>
+      <p style="font-size:.88rem;line-height:1.7;color:var(--text-mid);margin-bottom:16px;">"${r.text}"</p>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span style="font-size:1.8rem;">${r.avatar}</span>
+        <div><div style="font-weight:600;font-size:.85rem;">${r.name}</div><div style="font-size:.75rem;color:var(--text-light);">Purchased: ${r.product}</div></div>
+      </div>
+    </div>`,
+          )
+          .join("");
+      }
+
+      // ========= BUNDLES =========
+      function renderBundles() {
+        document.getElementById("bundlesGrid").innerHTML = bundles
+          .map(
+            (b) => `
+    <div class="bundle-card">
+      <div style="background:${b.color};padding:40px;text-align:center;">
+        <div style="font-size:3rem;margin-bottom:12px;">${b.emoji}</div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:500;color:#fff;margin-bottom:6px;">${b.name}</h3>
+        <p style="font-size:.85rem;color:rgba(255,255,255,.85);">${b.tagline}</p>
+      </div>
+      <div style="padding:24px;">
+        <p style="font-size:.85rem;color:var(--text-mid);line-height:1.6;margin-bottom:16px;">${b.description}</p>
+        <div style="margin-bottom:16px;">
+          <div style="font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text-light);margin-bottom:8px;">What's included:</div>
+          ${b.includes.map((i) => `<div style="font-size:.82rem;color:var(--text-mid);padding:4px 0;display:flex;align-items:center;gap:6px;"><span style="color:var(--sage);">✓</span> ${i}</div>`).join("")}
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+          <div>
+            <span style="font-size:.8rem;color:var(--text-light);text-decoration:line-through;margin-right:8px;">$${b.originalPrice}</span>
+            <span style="font-size:1.3rem;font-weight:700;color:var(--sage-dark);">$${b.price}</span>
+          </div>
+          <span style="background:#e8f5e8;color:var(--sage-dark);font-size:.75rem;padding:3px 10px;border-radius:20px;font-weight:600;">Save $${b.originalPrice - b.price}</span>
+        </div>
+        <div style="margin-bottom:10px;">
+          <input type="text" placeholder="Gift message (optional)..." style="width:100%;padding:10px 14px;border:1.5px solid #ddd;border-radius:10px;font-family:'Jost',sans-serif;font-size:.82rem;outline:none;" onfocus="this.style.borderColor='var(--sage)'" onblur="this.style.borderColor='#ddd'" />
+        </div>
+        <button class="btn-sage" style="width:100%;padding:13px;font-size:.88rem;" onclick="addBundle('${b.id}')">Add Bundle to Cart 🛁</button>
+      </div>
+    </div>`,
+          )
+          .join("");
+      }
+
+      // ========= JOURNAL =========
+      function renderJournal() {
+        document.getElementById("journalGrid").innerHTML = journalPosts
+          .map(
+            (p) => `
+    <div class="journal-card masonry-item" onclick="openJournal(${p.id})">
+      <div style="background:linear-gradient(145deg,#d4e4d4,#e8dff0,#f5ede0);height:160px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;">${p.emoji}</div>
+      <div style="padding:20px;">
+        <div style="display:flex;gap:10px;margin-bottom:10px;">
+          <span style="font-size:.72rem;color:var(--text-light);">${p.date}</span>
+          <span style="font-size:.72rem;color:var(--sage);">· ${p.readTime}</span>
+        </div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:500;margin-bottom:8px;line-height:1.35;">${p.title}</h3>
+        <p style="font-size:.82rem;color:var(--text-mid);line-height:1.6;">${p.excerpt}</p>
+        <div style="margin-top:14px;font-size:.78rem;color:var(--sage);font-weight:500;">Read more →</div>
+      </div>
+    </div>`,
+          )
+          .join("");
+      }
+
+      function openJournal(id) {
+        const post = journalPosts.find((p) => p.id === id);
+        document.getElementById("journalModalContent").innerHTML = `
+    <div style="text-align:center;font-size:3rem;margin-bottom:16px;">${post.emoji}</div>
+    <div style="font-size:.8rem;color:var(--text-light);margin-bottom:12px;">${post.date} · ${post.readTime}</div>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:400;margin-bottom:24px;line-height:1.3;">${post.title}</h2>
+    ${post.content}
+    <div style="margin-top:32px;padding:20px;background:var(--cream);border-radius:12px;text-align:center;">
+      <p style="font-size:.85rem;color:var(--text-mid);">Enjoyed this article? Join the Self-Care Circle for more →</p>
+      <button class="btn-sage" style="margin-top:12px;" onclick="closeJournalModal();setTimeout(()=>document.getElementById('newsletterEmail').scrollIntoView({behavior:'smooth'}),300)">Join the Newsletter</button>
+    </div>`;
+        document.getElementById("journalModal").classList.add("open");
+      }
+      function closeJournalModal() {
+        document.getElementById("journalModal").classList.remove("open");
+      }
+
+      // ========= FAQ =========
+      function renderFAQ() {
+        document.getElementById("faqList").innerHTML = faqData
+          .map(
+            (f, i) => `
+    <div style="background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.05);">
+      <button onclick="toggleAccordion(${i})" style="width:100%;padding:20px 24px;background:none;border:none;text-align:left;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-family:'Jost',sans-serif;font-size:.92rem;font-weight:500;color:var(--text-dark);">
+        ${f.q}
+        <span id="faq-arrow-${i}" style="color:var(--sage);font-size:1.2rem;transition:transform .3s;flex-shrink:0;margin-left:12px;">+</span>
+      </button>
+      <div class="accordion-content" id="faq-content-${i}">
+        <p style="padding:0 24px 20px;font-size:.88rem;color:var(--text-mid);line-height:1.7;">${f.a}</p>
+      </div>
+    </div>`,
+          )
+          .join("");
+      }
+
+      function toggleAccordion(i) {
+        const content = document.getElementById("faq-content-" + i);
+        const arrow = document.getElementById("faq-arrow-" + i);
+        content.classList.toggle("open");
+        arrow.style.transform = content.classList.contains("open")
+          ? "rotate(45deg)"
+          : "rotate(0deg)";
+      }
+
+      // ========= PRODUCT MODAL =========
+      function openProduct(id) {
+        const p = products.find((x) => x.id === id);
+        const similar = products
+          .filter(
+            (x) =>
+              x.id !== id && (x.category === p.category || x.scent === p.scent),
+          )
+          .slice(0, 3);
+        document.getElementById("productModalContent").innerHTML = `
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;flex-wrap:wrap;">
+      <div>
+        <div style="background:linear-gradient(145deg,#e8f0e8,#f0e8f5,#f5ede0);border-radius:16px;height:320px;display:flex;align-items:center;justify-content:center;font-size:6rem;margin-bottom:16px;">${p.emoji}</div>
+        <div style="display:flex;gap:8px;">
+          ${["🫙", "🌿", "✨", "💧"].map((e) => `<div style="width:70px;height:70px;background:#f0f0f0;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.8rem;cursor:pointer;border:2px solid transparent;transition:border .2s;" onmouseover="this.style.borderColor='var(--sage)'" onmouseout="this.style.borderColor='transparent'">${e}</div>`).join("")}
+        </div>
+      </div>
+      <div>
+        <div class="tag" style="margin-bottom:12px;">${p.category} · ${p.scent}</div>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:400;margin-bottom:8px;line-height:1.2;">${p.name}</h2>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
+          <span class="star">★★★★★</span>
+          <span style="font-size:.82rem;color:var(--text-light);">${p.reviews.length} reviews</span>
+        </div>
+        <p style="font-size:.9rem;color:var(--text-mid);line-height:1.7;margin-bottom:24px;">${p.description}</p>
+        
+        <div style="margin-bottom:20px;">
+          <div style="font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text-light);margin-bottom:10px;">Select Size</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            ${p.sizes.map((s, i) => `<button class="chip ${i === 1 ? "active" : ""}" onclick="selectSize(this,'${p.id}','${s.price}')" data-price="${s.price}">${s.label} — $${s.price}</button>`).join("")}
+          </div>
+        </div>
+
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:24px;">
+          <div style="font-size:1.8rem;font-weight:700;color:var(--sage-dark);">$<span id="modal-price-${p.id}">${p.sizes?.[1]?.price || p.price}</span></div>
+          <div style="font-size:.78rem;color:var(--sage);background:#e8f5e8;padding:4px 12px;border-radius:20px;">✓ In stock · Ships in 2 days</div>
+        </div>
+
+        <button class="btn-sage" style="width:100%;padding:16px;font-size:.95rem;margin-bottom:10px;" onclick="quickAdd(${p.id});closeProductModal()">Add to Cart 🛁</button>
+        <div style="font-size:.78rem;color:var(--text-light);text-align:center;">🔒 Secure checkout · 🐰 Cruelty-free · ♻️ Eco packaging</div>
+
+        <details style="margin-top:28px;">
+          <summary style="font-weight:600;font-size:.85rem;cursor:pointer;color:var(--text-dark);padding:12px 0;border-top:1px solid var(--cream-dark);">Ingredients</summary>
+          <ul style="padding:12px 0 0 16px;font-size:.82rem;color:var(--text-mid);line-height:1.8;">${p.ingredients.map((i) => `<li>${i}</li>`).join("")}</ul>
+        </details>
+        <details style="margin-top:4px;">
+          <summary style="font-weight:600;font-size:.85rem;cursor:pointer;color:var(--text-dark);padding:12px 0;border-top:1px solid var(--cream-dark);">How to Use</summary>
+          <p style="padding:12px 0 0;font-size:.82rem;color:var(--text-mid);line-height:1.7;">${p.howToUse}</p>
+        </details>
+      </div>
+    </div>
+
+    <div style="margin-top:40px;border-top:1px solid var(--cream-dark);padding-top:32px;">
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;margin-bottom:20px;">Customer Reviews</h3>
+      <div style="display:grid;gap:16px;">
+        ${p.reviews
+          .map(
+            (r) => `
+          <div class="review-card">
+            <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+              <div style="display:flex;align-items:center;gap:10px;">
+                <span style="font-size:1.5rem;">${r.avatar}</span>
+                <span style="font-weight:600;font-size:.88rem;">${r.name}</span>
+              </div>
+              <span class="star" style="font-size:.85rem;">${"★".repeat(r.rating)}</span>
+            </div>
+            <p style="font-size:.85rem;color:var(--text-mid);line-height:1.6;">"${r.text}"</p>
+          </div>`,
+          )
+          .join("")}
+      </div>
+    </div>
+
+    ${
+      similar.length
+        ? `<div style="margin-top:32px;border-top:1px solid var(--cream-dark);padding-top:32px;">
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;margin-bottom:20px;">You May Also Like</h3>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;">
+        ${similar
+          .map(
+            (
+              s,
+            ) => `<div style="flex:1;min-width:140px;background:#fff;border-radius:14px;padding:16px;text-align:center;cursor:pointer;border:1.5px solid var(--cream-dark);transition:border .2s;" onclick="closeProductModal();setTimeout(()=>openProduct(${s.id}),300)" onmouseover="this.style.borderColor='var(--sage)'" onmouseout="this.style.borderColor='var(--cream-dark)'">
+          <div style="font-size:2.5rem;margin-bottom:8px;">${s.emoji}</div>
+          <div style="font-size:.8rem;font-weight:500;color:var(--text-dark);">${s.name}</div>
+          <div style="font-size:.9rem;color:var(--sage-dark);font-weight:600;margin-top:4px;">$${s.price}</div>
+        </div>`,
+          )
+          .join("")}
+      </div>
+    </div>`
+        : ""
+    }
+  `;
+        // fix grid on mobile
+        const grid = document.querySelector(
+          "#productModalContent > div:first-child",
+        );
+        if (window.innerWidth < 640) grid.style.gridTemplateColumns = "1fr";
+        document.getElementById("productModal").classList.add("open");
+      }
+
+      function selectSize(el, pid, price) {
+        el.closest(".flex")
+          .querySelectorAll(".chip")
+          .forEach((c) => c.classList.remove("active"));
+        el.classList.add("active");
+        document.getElementById("modal-price-" + pid).textContent = price;
+      }
+
+      function closeProductModal() {
+        document.getElementById("productModal").classList.remove("open");
+      }
+
+      // ========= CART =========
+      function openCart() {
+        document.getElementById("cartSidebar").classList.add("open");
+        document.getElementById("cartOverlay").classList.add("open");
+        renderCart();
+      }
+      function closeCart() {
+        document.getElementById("cartSidebar").classList.remove("open");
+        document.getElementById("cartOverlay").classList.remove("open");
+      }
+
+      function quickAdd(id) {
+        const p = products.find((x) => x.id === id);
+        const existing = cart.find((c) => c.id === id);
+        if (existing) existing.qty++;
+        else
+          cart.push({
+            id: p.id,
+            name: p.name,
+            price: p.price,
+            emoji: p.emoji,
+            qty: 1,
+          });
+        updateCartBadge();
+        renderCart();
+        showToast(
+          "🛁 Added to cart — " + p.name.split(" ").slice(0, 3).join(" ") + "!",
+        );
+      }
+
+      function addBundle(bid) {
+        const b = bundles.find((x) => x.id === bid);
+        b.productIds.forEach((pid) => quickAdd(pid));
+        showToast("🎁 Bundle added to cart!");
+      }
+
+      function updateCartBadge() {
+        const total = cart.reduce((s, c) => s + c.qty, 0);
+        const badge = document.getElementById("cartBadge");
+        badge.style.display = total > 0 ? "flex" : "none";
+        badge.textContent = total;
+      }
+
+      function renderCart() {
+        const el = document.getElementById("cartItems");
+        if (!cart.length) {
+          el.innerHTML =
+            '<div style="text-align:center;padding:60px 20px;color:var(--text-light);"><div style="font-size:2.5rem;margin-bottom:12px;">🛁</div><p>Your cart is empty.<br/>Fill it with something beautiful.</p></div>';
+          document.getElementById("cartSubtotal").textContent = "$0.00";
+          return;
+        }
+        el.innerHTML = cart
+          .map(
+            (c) => `
+    <div style="display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--cream-dark);align-items:center;">
+      <div style="width:56px;height:56px;background:linear-gradient(145deg,#e8f0e8,#f0e8f5);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.8rem;flex-shrink:0;">${c.emoji}</div>
+      <div style="flex:1;">
+        <div style="font-size:.85rem;font-weight:500;margin-bottom:4px;">${c.name}</div>
+        <div style="font-size:.8rem;color:var(--sage-dark);font-weight:600;">$${c.price}</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <button class="qty-btn" onclick="changeQty(${c.id},-1)">−</button>
+        <span style="font-size:.9rem;font-weight:500;min-width:20px;text-align:center;">${c.qty}</span>
+        <button class="qty-btn" onclick="changeQty(${c.id},1)">+</button>
+      </div>
+      <button onclick="removeItem(${c.id})" style="background:none;border:none;color:var(--text-light);cursor:pointer;font-size:1rem;padding:4px;">✕</button>
+    </div>`,
+          )
+          .join("");
+        const subtotal = cart.reduce((s, c) => s + c.price * c.qty, 0);
+        document.getElementById("cartSubtotal").textContent =
+          "$" + subtotal.toFixed(2);
+      }
+
+      function changeQty(id, delta) {
+        const item = cart.find((c) => c.id === id);
+        if (!item) return;
+        item.qty += delta;
+        if (item.qty <= 0) cart = cart.filter((c) => c.id !== id);
+        updateCartBadge();
+        renderCart();
+      }
+
+      function removeItem(id) {
+        cart = cart.filter((c) => c.id !== id);
+        updateCartBadge();
+        renderCart();
+      }
+
+      // ========= CHECKOUT =========
+      function openCheckout() {
+        closeCart();
+        const subtotal = cart.reduce((s, c) => s + c.price * c.qty, 0);
+        const shipping = subtotal >= 45 ? 0 : 5.99;
+        document.getElementById("checkoutContent").innerHTML = `
+    <div style="background:var(--cream);border-radius:14px;padding:16px;margin-bottom:24px;">
+      ${cart.map((c) => `<div style="display:flex;justify-content:space-between;font-size:.85rem;padding:6px 0;"><span>${c.name} × ${c.qty}</span><span style="font-weight:500;">$${(c.price * c.qty).toFixed(2)}</span></div>`).join("")}
+      <div style="border-top:1px solid #ddd;margin-top:10px;padding-top:10px;display:flex;justify-content:space-between;font-size:.85rem;"><span>Shipping</span><span>${shipping === 0 ? '<span style="color:var(--sage)">Free 🎉</span>' : "$" + shipping.toFixed(2)}</span></div>
+      <div style="display:flex;justify-content:space-between;font-weight:700;font-size:1rem;margin-top:6px;"><span>Total</span><span>$${(subtotal + shipping).toFixed(2)}</span></div>
+    </div>
+    <div style="display:grid;gap:14px;margin-bottom:20px;">
+      <input type="text" placeholder="Full Name" style="padding:12px 16px;border:1.5px solid #ddd;border-radius:10px;font-family:'Jost';font-size:.9rem;outline:none;" onfocus="this.style.borderColor='var(--sage)'" onblur="this.style.borderColor='#ddd'" />
+      <input type="email" placeholder="Email" style="padding:12px 16px;border:1.5px solid #ddd;border-radius:10px;font-family:'Jost';font-size:.9rem;outline:none;" onfocus="this.style.borderColor='var(--sage)'" onblur="this.style.borderColor='#ddd'" />
+      <input type="text" placeholder="Shipping Address" style="padding:12px 16px;border:1.5px solid #ddd;border-radius:10px;font-family:'Jost';font-size:.9rem;outline:none;" onfocus="this.style.borderColor='var(--sage)'" onblur="this.style.borderColor='#ddd'" />
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <input type="text" placeholder="City" style="padding:12px 16px;border:1.5px solid #ddd;border-radius:10px;font-family:'Jost';font-size:.9rem;outline:none;" onfocus="this.style.borderColor='var(--sage)'" onblur="this.style.borderColor='#ddd'" />
+        <input type="text" placeholder="ZIP" style="padding:12px 16px;border:1.5px solid #ddd;border-radius:10px;font-family:'Jost';font-size:.9rem;outline:none;" onfocus="this.style.borderColor='var(--sage)'" onblur="this.style.borderColor='#ddd'" />
+      </div>
+    </div>
+    <div style="margin-bottom:20px;">
+      <div style="font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text-light);margin-bottom:12px;">Payment</div>
+      <input type="text" placeholder="Card number (4242 4242 4242 4242)" style="width:100%;padding:12px 16px;border:1.5px solid #ddd;border-radius:10px;font-family:'Jost';font-size:.9rem;outline:none;margin-bottom:10px;" onfocus="this.style.borderColor='var(--sage)'" onblur="this.style.borderColor='#ddd'" />
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <input type="text" placeholder="MM/YY" style="padding:12px 16px;border:1.5px solid #ddd;border-radius:10px;font-family:'Jost';font-size:.9rem;outline:none;" onfocus="this.style.borderColor='var(--sage)'" onblur="this.style.borderColor='#ddd'" />
+        <input type="text" placeholder="CVV" style="padding:12px 16px;border:1.5px solid #ddd;border-radius:10px;font-family:'Jost';font-size:.9rem;outline:none;" onfocus="this.style.borderColor='var(--sage)'" onblur="this.style.borderColor='#ddd'" />
+      </div>
+    </div>
+    <button class="btn-sage" style="width:100%;padding:16px;font-size:.95rem;" onclick="placeOrder()">Place Order · $${(subtotal + shipping).toFixed(2)} →</button>
+    <p style="text-align:center;font-size:.75rem;color:var(--text-light);margin-top:12px;">🔒 Secured by Stripe · Your info is safe with us</p>
+  `;
+        document.getElementById("checkoutModal").classList.add("open");
+      }
+
+      function closeCheckoutModal() {
+        document.getElementById("checkoutModal").classList.remove("open");
+      }
+
+      function placeOrder() {
+        const orderNum = "WS-" + Math.floor(Math.random() * 90000 + 10000);
+        document.getElementById("checkoutContent").innerHTML = `
+    <div style="text-align:center;padding:20px 0;">
+      <div id="orderSuccess" style="font-size:3rem;margin-bottom:16px;">🎉</div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;margin-bottom:8px;font-weight:400;">Order placed!</h2>
+      <p style="color:var(--sage);font-weight:600;margin-bottom:16px;">Order ${orderNum}</p>
+      <p style="color:var(--text-mid);line-height:1.7;margin-bottom:24px;">Thank you so much! Elena will personally pack your order within 2 business days. Check your email for confirmation.</p>
+      <div style="background:var(--cream);border-radius:12px;padding:20px;margin-bottom:24px;font-size:.85rem;color:var(--text-mid);">
+        💌 A personal thank-you card from Elena is included in every order.
+      </div>
+      <button class="btn-sage" onclick="closeCheckoutModal();cart=[];updateCartBadge();renderCart();">Continue Shopping</button>
+    </div>`;
+        launchConfetti();
+      }
+
+      // ========= CONFETTI =========
+      function launchConfetti() {
+        const colors = ["#6B8E6B", "#B8A9C9", "#e8b4b0", "#f5d87a", "#4e6b4e"];
+        for (let i = 0; i < 80; i++) {
+          setTimeout(() => {
+            const p = document.createElement("div");
+            p.className = "confetti-piece";
+            p.style.cssText = `left:${Math.random() * 100}vw;top:-20px;background:${colors[Math.floor(Math.random() * colors.length)]};width:${6 + Math.random() * 8}px;height:${6 + Math.random() * 8}px;animation-duration:${2.5 + Math.random() * 2}s;animation-delay:${Math.random() * 0.5}s;border-radius:${Math.random() > 0.5 ? "50%" : "2px"};`;
+            document.body.appendChild(p);
+            setTimeout(() => p.remove(), 4000);
+          }, i * 30);
+        }
+      }
+
+      // ========= TOAST =========
+      let toastTimer;
+      function showToast(msg) {
+        const t = document.getElementById("toast");
+        document.getElementById("toast-msg").textContent = msg;
+        t.classList.add("show");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => t.classList.remove("show"), 3000);
+      }
+
+      // ========= NEWSLETTER =========
+      function subscribeNewsletter() {
+        const email = document.getElementById("newsletterEmail").value;
+        if (!email || !email.includes("@")) {
+          showToast("⚠️ Please enter a valid email.");
+          return;
+        }
+        document.getElementById("newsletterForm").style.display = "none";
+        document.getElementById("newsletterSuccess").style.display = "block";
+        showToast("✨ Welcome to the Self-Care Circle!");
+      }
+
+      // ========= CONTACT =========
+      function submitContact() {
+        const name = document.getElementById("cName").value;
+        const email = document.getElementById("cEmail").value;
+        if (!name || !email) {
+          showToast("⚠️ Please fill in your name and email.");
+          return;
+        }
+        document.getElementById("contactModal").classList.add("open");
+      }
+
+      // ========= INIT =========
+      renderFeatured();
+      renderHomeReviews();
+      renderBundles();
+      renderJournal();
+      renderChips();
+      renderFAQ();
+      applyFilters();
+
+      // Add FAQ to footer nav
+      document
+        .querySelectorAll("[onclick=\"showView('faq')\"]")
+        .forEach((el) => el.addEventListener("click", () => showView("faq")));
+    </script>
+  </body>
+</html>
